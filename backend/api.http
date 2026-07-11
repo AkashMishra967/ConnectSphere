@@ -2,12 +2,22 @@ POST http://localhost:9090/register HTTP/1.1
 content-Type: application/json
 
 {
-    "username" :"mishraji",
-    "password": "Akash1123",
-    "email": "minakshi123@gmail.com",
-    "name" : "Hum na Bataye to"
+    "username" :"Aman",
+    "password": "Aman1123",
+    "email": "aman123@gmail.com",
+    "name" : "Amni ji aap kaise ho"
 }
 
+
+###
+
+POST http://localhost:9090/login HTTP/1.1
+content-Type: application/json
+
+{
+    "email": "aman123@gmail.com",
+    "password": "Aman1123"
+}
 
 
 
@@ -21,10 +31,47 @@ content-Type: application/json
     "password": "Akash1123"
 }
 
+
 ###
 GET http://localhost:9090/get_user_and_profile
 Content-Type: application/json
 
 {
-    "token":"57d665821f4a2a22b8339f73dc6cf23af8230eac10cf67ff65222d3eb1d16205"
+    "token":"7e23078fa2c244428ea657dfd83a6b981e044d6a5088ca206ae8386731009020"
 }
+
+
+
+###
+POST http://localhost:9090/update_profile_data
+Content-Type: application/json
+
+{
+    "token": "6171d9186a35f41e93770d55f11398b8cdc260a2956c0892b1b606deed820af1",
+    "bio": "Your bio text here",
+    "currentPost": "CTO",
+    "pastWork":[
+        {
+            "company": "Google",
+            "position": "CTO",
+            "years": "3+"
+        }
+    ],
+        "education":[
+            {
+                "school": "IIT",
+                "degree": "B.Tech",
+                "fileOfStudy": "2015-2019"
+            }
+        ]
+    
+}
+
+
+
+
+
+
+
+###
+GET http://localhost:9090/user/get_all_users
