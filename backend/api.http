@@ -2,10 +2,10 @@ POST http://localhost:9090/register HTTP/1.1
 content-Type: application/json
 
 {
-    "username" :"Aman",
-    "password": "Aman1123",
-    "email": "aman123@gmail.com",
-    "name" : "Amni ji aap kaise ho"
+    "username" :"Ishu",
+    "password": "123",
+    "email": "ishu123@gmail.com",
+    "name" : "Ishika Mishra"
 }
 
 
@@ -15,8 +15,8 @@ POST http://localhost:9090/login HTTP/1.1
 content-Type: application/json
 
 {
-    "email": "aman123@gmail.com",
-    "password": "Aman1123"
+    "email": "ishu123@gmail.com",
+    "password": "123"
 }
 
 
@@ -37,7 +37,7 @@ GET http://localhost:9090/get_user_and_profile
 Content-Type: application/json
 
 {
-    "token":"7e23078fa2c244428ea657dfd83a6b981e044d6a5088ca206ae8386731009020"
+    "token":"73a29e8fa48234f2ce9ed9e719ea90db16a094c068fc4fd494dc675328e591a4"
 }
 
 
@@ -47,7 +47,7 @@ POST http://localhost:9090/update_profile_data
 Content-Type: application/json
 
 {
-    "token": "6171d9186a35f41e93770d55f11398b8cdc260a2956c0892b1b606deed820af1",
+    "token": "bc7ffc5c3b0bb4edb42c1695b5ebb231c0c85f16c6af75a239975f6dafb0e68b",
     "bio": "Your bio text here",
     "currentPost": "CTO",
     "pastWork":[
