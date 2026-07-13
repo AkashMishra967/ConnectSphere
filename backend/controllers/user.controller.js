@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import PDFDocument from "pdfkit";
 import fs from "fs";
-import { Connection } from "mongoose";
+import mongoose from "mongoose";
 
 
 const convertUserDataTOPDF = async (userData) =>{
@@ -285,3 +285,5 @@ export const acceptConnectionRequest = async (req, res) =>{
         return res.status(500).json({message: err.message})
     }
 }
+
+
