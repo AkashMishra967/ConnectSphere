@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connectionSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
