@@ -77,7 +77,7 @@ export const login = async(req,res) =>{
         if(!isMatch) return res.status(400).json({message:"invalid credentials"});
         const token = crypto.randomBytes(32).toString("hex");
         await User.updateOne({ _id: user._id}, {token});
-        return res.json({token});
+        return res.json({token:token});
     }
     catch(error){
 
