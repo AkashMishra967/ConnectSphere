@@ -29,7 +29,7 @@ const authslice = createSlice({
             state.message = "knocking the door..."
         })
 
-        addCase(loginUser.fulfilled,(state,action) =>{
+        .addCase(loginUser.fulfilled,(state,action) =>{
             state.isLoading = false;
             state.isError = false;
             state.isSuccess = true;
