@@ -7,12 +7,12 @@ export default function Home() {
   const router = useRouter();
   return (
  <>
- <div className="container">
+ <div className={styles.container}>
   <div className="mainContainer">
     <div className="mainContainer_left">
       <p>Connect with Frinds without Exaggeration</p>
   <p> A true social media platform, with stories no blufs</p>
-  <div className="buttonJoin">
+  <div className={styles.buttonJoin}>
     <p>Join Now</p>
   </div>
     </div>
