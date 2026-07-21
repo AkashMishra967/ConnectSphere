@@ -1,9 +1,10 @@
+import Userlayouts from '@/src/layouts/userlayouts';
 import React from 'react'
  function LoginComponent() {
   return (
-    <div>
-      <div>LoginComponent</div>
-    </div>
+   <Userlayouts>
+    <h2>Login</h2>
+   </Userlayouts>
   )
 }
 

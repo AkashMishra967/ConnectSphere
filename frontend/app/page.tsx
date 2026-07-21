@@ -2,12 +2,13 @@
 
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation"; 
+import UserLayout from "../src/layouts/userlayouts";
 
 
 export default function Home() {
   const router = useRouter();
   return (
- <>
+ <UserLayout>
  <div className={styles.container}>
   <div className={styles.mainContainer}>
     <div className={styles.mainContainer_left}>
@@ -31,6 +32,6 @@ export default function Home() {
   </div>
  </div>
  
- </>
+ </UserLayout>
   );
 }
