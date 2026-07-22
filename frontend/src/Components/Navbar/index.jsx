@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
@@ -14,8 +16,6 @@ export default function NavBarComponent() {
             router.push("/login")
           }} className={styles.buttonJoin}>
             <p>Be a part</p>
-
-
           </div>
         </div>
       </nav>
