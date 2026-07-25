@@ -27,30 +27,37 @@ const [userLogingMethod, setUserLoginMethod] = useState(true);
 
 <div className={styles.cardContainer_left}>
   <p className={styles.cardleft_heading}>{userLogingMethod ? "Sign in" : "Sign up"}</p>
-<input className={styles.inputfield} type='text' placeholder='username' />
 
 
+<div className={styles.inputContainers}>
+<div className={styles.inputRow}>
+  <input className={styles.inputField} type="text" placeholder='username'/>
+  <input className={styles.inputField} type="text" placeholder='Name'/>
+</div>
+<input className={styles.inputField} type="text" placeholder='email'/>
+<input className={styles.inputField} type="text" placeholder='Password'/>
 
+<div onClick={() =>{
+  
+}}
 
+ className={styles.buttonWithOutline}>
+  <p>{userLogingMethod ?"Sign In" :"Sigin Up"}</p>
 </div>
 
-<div className={styles.inputContainer}></div>
+
+
+
 <div>
-  <input className={styles.inputField} type="text" placeholder='username'/>
-  <input className={styles.inputField} type="text" placeholder='username'/>
-</div>
-
-
-
-
-
-
-
+  </div>
 
 <div className={styles.cardContainer_right}>
 
 </div>
 </div>
+</div>
+</div>
+
 
     </div>
    </Userlayouts>
