@@ -16,6 +16,7 @@ const [email, setEmailAddress] = useState("");
 const [username, setUsername] = useState("");
 const [name, setName] = useState("");
 const [password, setPassword] = useState("");
+const [formError, setFormError] = useState("");
 
 
   useEffect(() =>{
@@ -25,14 +26,50 @@ const [password, setPassword] = useState("");
   },[authState.loggedIn, router]);
 
 
-const handlerRegister = () =>{
+const handlerRegister = async () =>{
   console.log("registering ...");
-  dispath(registerUser({username,password,email,name}))
+  try{
+    await dispath(registerUser({username,password,email,name})).unwrap();
+    // Register successful - login mode pe switch karo, dashboard pe mat bhejo
+    setUserLoginMethod(true);
+  }catch(err){
+    // error already authState.message mein handle ho raha hai
+    console.log("register failed", err);
+  }
 }
 const handlerLogin = () =>{
   console.log("logging in ...");
   dispath(loginUser({email,password}))
 }
+
+const validateForm = () => {
+  if(userLogingMethod){
+    // Sign in mode - sirf email, password chahiye
+    if(!email.trim() || !password.trim()){
+      setFormError("Email and Password are required");
+      return false;
+    }
+  }else{
+    // Sign up mode - sab fields chahiye
+    if(!username.trim() || !name.trim() || !email.trim() || !password.trim()){
+      setFormError("All fields are required");
+      return false;
+    }
+  }
+  setFormError("");
+  return true;
+}
+
+const handleSubmit = () => {
+  if(!validateForm()) return;
+
+  if(userLogingMethod){
+    handlerLogin();
+  }else{
+    handlerRegister();
+  }
+}
+
   return (
    <Userlayouts>
 
@@ -42,33 +79,26 @@ const handlerLogin = () =>{
 <div className={styles.cardContainer_left}>
   <p className={styles.cardleft_heading}>{userLogingMethod ? "Sign in" : "Sign up"}</p>
 <p style={{color:authState.isError ? "red":"green"}}>{authState.message}</p>
+{formError && <p style={{color:"red"}}>{formError}</p>}
 
 <div className={styles.inputContainers}>
+{!userLogingMethod  && 
 <div className={styles.inputRow}>
-  <input onChange = {(e) =>{
-    setUsername(e.target.value)
+  <input onChange = {(e) =>{setUsername(e.target.value)
   }} className={styles.inputField} type="text" placeholder='username'/>
-  <input onChange = {(e) =>{
-setName(e.target.value)
+  <input onChange = {(e) =>{setName(e.target.value)
   }}className={styles.inputField} type="text" placeholder='Name'/>
-</div>
+</div>}
 <input onChange ={(e) =>{
   setEmailAddress(e.target.value)
 }}className={styles.inputField} type="text" placeholder='email'/>
 <input onChange = {(e) => setPassword(e.target.value)}
 className={styles.inputField} type="password" placeholder='Password'/>
 
-<div onClick={() =>{
-  if(userLogingMethod){
-    handlerLogin();
-  }
-  else{
-    handlerRegister();
-  }
-}}
+<div onClick={handleSubmit}
 
  className={styles.buttonWithOutline}>
-  <p>{userLogingMethod ?"Sign In" :"Sigin Up"}</p>
+  <p>{userLogingMethod ?"Sign In" :"Sign Up"}</p>
 </div>
 
 
@@ -79,6 +109,11 @@ className={styles.inputField} type="password" placeholder='Password'/>
 </div>
 
 <div className={styles.cardContainer_right}>
+
+
+
+
+
 
 </div>
 </div>

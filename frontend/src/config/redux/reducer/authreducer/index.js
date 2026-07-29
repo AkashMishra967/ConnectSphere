@@ -39,23 +39,23 @@ const authslice = createSlice({
 .addCase(loginUser.rejected,(state,action) =>{
     state.isLoading = false;
     state.isError = true;
-    state.message = action.payload
+    state.message = action.payload?.message || "Something went wrong"
 })
 .addCase(registerUser.pending,(state) =>{
 state.isLoading = true
 state.message = "Register you..."
 })
 .addCase(registerUser.fulfilled,(state,action) =>{
-    state.isLoading = false,
-    state.isError = false,
-    state.isSuccess = false,
-    state.loggedIn = true;
-    state.message = "Register is Successfull"
+    state.isLoading = false;
+    state.isError = false;
+    state.isSuccess = true;
+    // loggedIn intentionally set nahi kiya - register ke baad auto-login nahi karna
+    state.message = "Registration successful! Please login."
 })
 .addCase(registerUser.rejected,(state,action) =>{
 state.isLoading = false;
 state.isError = true;
-state.message = action.payload
+state.message = action.payload?.message || "Something went wrong"
 })
     }
 })
