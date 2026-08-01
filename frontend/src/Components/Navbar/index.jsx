@@ -2,9 +2,13 @@
 
 import React from 'react'
 import styles from "./styles.module.css";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 export default function NavBarComponent() {
   const router = useRouter();
+
+const authState = useSelector((state)=> state.auth)
+
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
@@ -12,14 +16,25 @@ export default function NavBarComponent() {
           router.push("/")
         }}>Pro Connect</h1>
         <div className={styles.navBarOptionContainer}>
+
+{authState.profileFetched && <div>
+  <div style={{display:"flex",gap:"1.2rem"}}>
+    <p>Hey, {authState.user.userId.name}</p>
+    <p>Profile</p>
+  </div>
+  
+  </div>}
+
+
+{!authState.profileFetched && 
           <div onClick={() =>{
             router.push("/login")
           }} className={styles.buttonJoin}>
             <p>Be a part</p>
-          </div>
+          </div>}
         </div>
       </nav>
-      <h2>Hello</h2>
+      
     </div>
   )
 }

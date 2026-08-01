@@ -1,5 +1,5 @@
 const {createSlice} = require("@reduxjs/toolkit")
-const { loginUser, registerUser } = require("../../action/authAction")
+const { loginUser, registerUser, getAboutUser } = require("../../action/authAction")
 
 const initialState ={
     user:[],
@@ -57,7 +57,28 @@ state.isLoading = false;
 state.isError = true;
 state.message = action.payload?.message || "Something went wrong"
 })
+
+
+.addCase(getAboutUser.fulfilled,(state,action) =>{
+    state.isLoading = false;
+    state.isError = false;
+    state.profileFetched = true;
+    state.user = action.payload
+    
+})
+
+
+
     }
 })
+
+
+
+
+
+
+
+
+
 
 export default authslice.reducer

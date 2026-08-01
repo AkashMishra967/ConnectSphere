@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {clientServer} from "@/config";
+import clientServer from "@/src/config";
 
 export const getAllPosts = createAsyncThunk(
     "post/getAllPosts",async(_, thunkAPI) =>{

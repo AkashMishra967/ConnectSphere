@@ -1,5 +1,6 @@
 import {configureStore, isAction} from "@reduxjs/toolkit"
 import authReducer from "./reducer/authreducer";
+import postReducer from "./reducer/authreducer/postreducer";
 
 
 // step for state management
