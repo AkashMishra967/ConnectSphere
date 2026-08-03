@@ -13,15 +13,21 @@
 .homeContainer__leftBar{
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
-    align-items: center;
+    gap: 2.5rem;
+    
+    
  
+}
+.homeContainer__leftBar > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 .sideBarOption{
     display: flex;
     align-items: center;
     font-size: 1.4rem;
-    gap: 0.8rem;
+    gap: 1.2rem;
     width: 80%;
     max-width: 80%;
     margin: 0 auto;
