@@ -1,10 +1,20 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect } from 'react'
 import styles from "./index.module.css";
-import { useRouter } from "next/navigation";   
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+
 export default function DashboardLayout({children}) {
 
 const router = useRouter();
+const authState = useSelector((state) => state.auth)
 
+useEffect(() =>{
+    if(localStorage.getItem('token') === null){
+      router.push("/login")
+    }
+  },[router])
 
   return (
     <div>
@@ -37,7 +47,7 @@ router.push("/dashboard")
     </div>
 
     <div onClick={() =>{
-router.push("/my-connections")
+router.push("/my-conections")
 
     }} className={styles.sideBarOption}>
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
@@ -54,7 +64,17 @@ router.push("/my-connections")
 {children}
  </div>
 <div className="homeContainer__extraContainer">
+<h3>Top Profile</h3>
 
+{authState.all_profiles_fetched && authState.all_users.map((profile) =>{
+
+return(
+  <div key={profile._id} className={styles.extraContainer_profile}>
+<p>{profile.userId.name}</p>
+
+</div>
+)
+})}
 </div>
 
 

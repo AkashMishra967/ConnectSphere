@@ -1,9 +1,10 @@
 "use client"
 import { useRouter } from "next/navigation";
-import React,{useEffect, useState} from 'react'
+import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "@/src/config/redux/action/postAction";
-import { getAboutUser } from "@/src/config/redux/action/authAction";
+import { getAboutUser, getAllUsers } from "@/src/config/redux/action/authAction";
+import { setTokenIsThere, setTokenIsNotThere } from "@/src/config/redux/reducer/authreducer";
 import DashboardLayout from "@/src/layouts/DashboardLayouts";
 import Userlayouts from "@/src/layouts/userlayouts";
 
@@ -13,32 +14,29 @@ export default function Dashboard(){
   const dispath = useDispatch()
   const authState = useSelector((state) => state.auth)
 
-  const [isTokenThere,setIsTokenThere] = useState(false)
-
   useEffect(() =>{
-    console.log("checking token:", localStorage.getItem('token'))
-    if(localStorage.getItem('token') === null){
-      router.push("/login")
+    const token = localStorage.getItem('token');
+    if(token){
+      dispath(setTokenIsThere())
     } else {
-      setIsTokenThere(true)
+      dispath(setTokenIsNotThere())
     }
-  },[router])
+  },[dispath])
 
   useEffect(() =>{
-    console.log("isTokenThere:", isTokenThere)
-    if(isTokenThere){
+    if(authState.isTokenThere){
       dispath(getAllPosts())
       dispath(getAboutUser({token: localStorage.getItem('token')}))
     }
-  },[isTokenThere, dispath])
+    if(!authState.all_profiles_fetched){
+      dispath(getAllUsers());
+    }
+  },[authState.isTokenThere, authState.all_profiles_fetched, dispath])
 
   return(
     <Userlayouts>
     <DashboardLayout>
-
-  <h1>Dashboard</h1>
-
-
+      <h1>Dashboard</h1>
     </DashboardLayout>
     </Userlayouts>
   )

@@ -1,5 +1,5 @@
 const {createSlice} = require("@reduxjs/toolkit")
-const { loginUser, registerUser, getAboutUser } = require("../../action/authAction")
+const { loginUser, registerUser, getAboutUser, getAllUsers } = require("../../action/authAction")
 
 const initialState ={
     user:[],
@@ -8,10 +8,16 @@ const initialState ={
     isLoading:false,
     loggedIn:false,
     message: "",
+    isTokenThere:false,
     profileFetched: false,
     connection:[],
-    connectionRequest:[]
+    connectionRequest:[],
+    all_users:[],
+    all_profiles_fetched:false
 }
+
+
+
 
 
 const authslice = createSlice({
@@ -21,8 +27,18 @@ const authslice = createSlice({
         reset:() =>initialState,
         handleLoginUser:(state) =>{
             state.message = "hello"
+        },
+        emptyMessage: (state) =>{
+            state.message = " "
+        },
+        setTokenIsThere: (state) =>{
+            state.isTokenThere = true
+        },
+        setTokenIsNotThere: (state) =>{
+            state.isTokenThere = false
         }
     },
+
     extraReducers: (builders) =>{
         builders.addCase(loginUser.pending,(state) =>{
             state.isLoading = true
@@ -66,7 +82,12 @@ state.message = action.payload?.message || "Something went wrong"
     state.user = action.payload
     
 })
-
+.addCase(getAllUsers.fulfilled,(state,action) =>{
+    state.isLoading = false;
+    state.isError = false;
+    state.all_profiles_fetched = true;   
+    state.all_users = action.payload.profile  
+})
 
 
     }
@@ -79,6 +100,6 @@ state.message = action.payload?.message || "Something went wrong"
 
 
 
-
+export const {reset, emptyMessage, setTokenIsThere, setTokenIsNotThere} = authslice.actions;
 
 export default authslice.reducer
