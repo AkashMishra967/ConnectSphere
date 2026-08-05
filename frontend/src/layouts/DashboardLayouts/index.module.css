@@ -29,6 +29,7 @@
     font-size: 1.4rem;
     gap: 1.2rem;
     width: 80%;
+    min-width: 100px;
     max-width: 80%;
     margin: 0 auto;
     cursor: pointer;
