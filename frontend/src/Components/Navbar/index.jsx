@@ -3,8 +3,9 @@
 import React from 'react'
 import styles from "./styles.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { reset } from "@/src/config/redux/reducer/authreducer";
 import { useRouter } from "next/navigation";
-import { reset } from "../../config/redux/reducer/authreducer";
+
 export default function NavBarComponent() {
   const router = useRouter();
 

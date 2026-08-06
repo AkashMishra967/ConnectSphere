@@ -2,7 +2,7 @@ const {createSlice} = require("@reduxjs/toolkit")
 const { loginUser, registerUser, getAboutUser, getAllUsers } = require("../../action/authAction")
 
 const initialState ={
-    user:[],
+    user:undefined,
     isError:false,
     isSuccess:false,
     isLoading:false,
