@@ -1,14 +1,16 @@
 "use client"
 import { useRouter } from "next/navigation";
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./index.module.css"
-import { getAllPosts } from "@/src/config/redux/action/postAction";
+import { createPost, getAllPosts } from "@/src/config/redux/action/postAction";
 import { getAboutUser, getAllUsers } from "@/src/config/redux/action/authAction";
 import { setTokenIsThere, setTokenIsNotThere } from "@/src/config/redux/reducer/authreducer";
 import DashboardLayout from "@/src/layouts/DashboardLayouts";
 import Userlayouts from "@/src/layouts/userlayouts";
 import { BASE_URL } from "@/src/config";
+import { serialize } from "v8";
+import { create } from "domain";
 
 export default function Dashboard(){
 
@@ -38,13 +40,24 @@ console.log("User:", authState.user);
   },[authState.isTokenThere, authState.all_profiles_fetched, dispath])
 
 
+
+const [postContent, setPostContent] = useState(""); 
+const [fileContent, setFileContent] = useState(); 
+
+const handleUpload = async() =>{
+  await dispath(createPost({file: fileContent, body:postContent}));
+  setPostContent("");
+  setFileContent(null)
+}
+
+
 if(authState.user){
 
 
   return(
     <Userlayouts>
     <DashboardLayout>
-      <div className="scrollComponent">
+      <div className={styles.scrollComponent}>
 
 <div className={styles.createPostContainer}>
 {authState?.user?.userId?.profilePicture && (
@@ -54,7 +67,11 @@ if(authState.user){
   />
  
 )}
-  <textarea name="" id=""></textarea>
+  <textarea onChange={(e) =>
+setPostContent(e.target.value)}
+value={postContent}
+ placeholder={"what's in your mind?"}className={styles.textAreaOfContent} name="" id=""></textarea>
+
 
 
 <label htmlFor="fileUpload">
@@ -64,7 +81,10 @@ if(authState.user){
 </svg>
 </div>
 </label>
-<input type="file" hidden id="fileUpload"/>
+<input onChange={(e) => setFileContent(e.target.files[0])} type="file" hidden id="fileUpload"/>
+{postContent.length > 0 &&
+<div onClick={handleUpload} className={styles.uploadButton}>Post</div>
+}
 </div>
 
       </div>
