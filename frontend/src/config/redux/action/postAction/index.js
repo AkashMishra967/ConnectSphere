@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import clientServer from "@/src/config";
-import { userAgent } from "next/server";
+
 
 export const getAllPosts = createAsyncThunk(
     "post/getAllPosts",async(_, thunkAPI) =>{

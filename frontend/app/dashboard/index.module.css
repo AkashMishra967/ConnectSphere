@@ -1,6 +1,8 @@
 .scrollComponent{
     display: flex;
     justify-content: center;
+    
+    
 }
 
 .createPostContainer{
@@ -13,9 +15,16 @@ align-items: center;
 border-radius: 20px;
 
 }
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+     width: 60%;
+    gap: 1.3rem;
+}
 .uploadButton{
     position: absolute;
-    right: 210;
+    left: 500;
     bottom: -42px;
     background: rgb(2,93,158);
     color: white;
@@ -32,7 +41,7 @@ border-radius: 20px;
 }
 
 .createPostContainer > textarea{
-    width: 60%;
+    width: 100%;
     
 }
 
@@ -52,7 +61,7 @@ border-radius: 20px;
 }
 
 .textAreaOfContent{
-    width: 60%;
+    flex: 1;
     height: 70%;
     border: 1px solid silver;
     border-radius: 10px;
@@ -60,4 +69,33 @@ border-radius: 20px;
     padding-inline: 1.5rem;
     padding-block: 0.8rem;
     outline: none;
+}
+.singleCard{
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 1px solid rgb(179,179,179);
+}
+.singleCard_profileContainer{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    padding-right: 3.4rem;
+}
+
+.singleCard_profileContainer>img{
+    width: 10%;
+    border-radius: 50%;
+}
+.singleCard_image{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.singleCard_image > img{
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 50%;
 }
