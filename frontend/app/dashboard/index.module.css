@@ -99,3 +99,23 @@ border-radius: 20px;
     object-fit: cover;
     border-radius: 50%;
 }
+
+.optionsContainer{
+    display: flex;
+    height: 20%;
+    width: 100%;
+    padding-block: 0.6rem;
+    justify-content: space-between;
+}
+.singleOption_optionsContainer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.singleOption_optionsContainer > svg{
+width: 8%;
+    height: 100%;
+}
