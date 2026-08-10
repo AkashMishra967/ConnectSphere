@@ -73,7 +73,7 @@ return res.status(500).json({message: err.message})
 
 
 export const get_comments_by_post = async (req,res) =>{
-    const {post_id} = req.body;
+    const {post_id} = req.query;
 
     try{
         const post = await Post.findOne({_id: post_id});
@@ -112,22 +112,19 @@ export const delete_comment_of_user = async (req,res) =>{
     }
 }
 
-
-
 export const increment_likes = async(req,res) =>{
     const {post_id} = req.body;
 
     try{
-
         const post = await Post.findOne({_id:post_id});
         if(!post){
             return res.status(404).json({message: "Post not found"})
         }
-        post.likes = post.like +1;
+        post.likes = post.likes + 1;   // fix: "post.likes" (with 's')
         await post.save();
-        return res.json({message: "Like increment"})
+        return res.json({message: "Like incremented"})
 
     }catch(err){
-        return res.status(500).json({message: "err.message"});
+        return res.status(500).json({message: err.message});   
     }
 }

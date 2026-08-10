@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getAllPosts } from "../../../action/postAction"
+import { getAllComments, getAllPosts } from "../../../action/postAction"
 
 
 const initialState = {
@@ -19,7 +19,7 @@ const postSlice = createSlice({
     reducers:{
         reset: () => initialState,
         resetPostId: (state) =>{
-            state.postId = " "
+            state.postId = ""
         },
     },
 
@@ -40,9 +40,12 @@ const postSlice = createSlice({
             state.isError = true;
             state.message = action.payload
         })
+        .addCase(getAllComments.fulfilled,(state,action) =>{
+            state.postId = action.payload.post_id
+        })
     }
 })
 
-
+export const {resetPostId} = postSlice.actions;
 
 export default postSlice.reducer;
