@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import Post from "../models/post.model.js";
 import comment from "../models/comment.model.js";
 
+
 export const activeCheck = async (req, res) =>{
     return res.status(200).json({message:"RUNNING"})
 }
@@ -70,8 +71,6 @@ return res.status(500).json({message: err.message})
 }
 }
 
-
-
 export const get_comments_by_post = async (req,res) =>{
     const {post_id} = req.query;
 
@@ -80,11 +79,18 @@ export const get_comments_by_post = async (req,res) =>{
         if(!post){
             return res.status(404).json({message: "Post not found"})
         }
-        return res.json({comments: post.comments})
+
+        const comments = await comment
+            .find({postId: post_id})
+            .populate("userId","username name");
+        return res.json(comments.reverse())
+
     }catch(err){
-      return  res.status(500).json({message: err.message})
+      return res.status(500).json({message: err.message})
     }
 }
+
+
 
 
 
@@ -128,3 +134,49 @@ export const increment_likes = async(req,res) =>{
         return res.status(500).json({message: err.message});   
     }
 }
+
+export const postComment = async (req,res) =>{
+    const {token, post_id, commentBody} = req.body;
+    try{
+        const user = await User.findOne({token:token});
+        if(!user){
+            return res.status(404).json({message: "User not found"})
+        }
+        const post = await Post.findOne({_id: post_id});
+        if(!post){
+            return res.status(404).json({message: "Post not found"})
+        }
+        const newComment = new comment({
+            userId: user._id,
+            postId: post_id,
+            body: commentBody
+        });
+        await newComment.save();
+
+        post.commentsCount = (post.commentsCount || 0) + 1;
+        await post.save();
+
+        return res.status(200).json({message: "Comment Added"})
+    }catch(err){
+        return res.status(500).json({message: err.message})
+    }
+}
+
+
+export const increment_share = async(req,res) =>{
+    const {post_id} = req.body;
+    try{
+        const post = await Post.findOne({_id:post_id});
+        if(!post){
+            return res.status(404).json({message: "Post not found"})
+        }
+        post.shareCount = (post.shareCount || 0) + 1;
+        await post.save();
+        return res.json({message: "Share incremented"})
+    }catch(err){
+        return res.status(500).json({message: err.message});
+    }
+}
+
+
+

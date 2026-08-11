@@ -310,7 +310,7 @@ export const commentPost = async(req,res) =>{
         const comment = new comment({
             userId: user._id,
             postId: post_id,
-            comment:commentBody
+            body:commentBody
         });
 
         await comment.save();

@@ -96,3 +96,39 @@ export const getAllComments = createAsyncThunk(
         }
     }
 )
+
+
+
+export const postComment = createAsyncThunk(
+    "post/postComment",async(commentData,thunkAPI) =>{
+        try{
+            console.log({
+                post_id: commentData.post_id,
+                body: commentData.body
+            })
+            const response = await clientServer.post("/post_comment",{
+                token:localStorage.getItem("token"),
+                post_id: commentData.post_id,
+                commentBody: commentData.body
+            });
+            return thunkAPI.fulfillWithValue(response.data)
+        }catch(error){
+            return thunkAPI.rejectWithValue("Something went wrong");
+        }
+    }
+)
+
+
+
+export const incrementShare = createAsyncThunk(
+    "post/incrementShare", async(post,thunkAPI) =>{
+        try{
+            const response = await clientServer.post('/increment_share',{
+                post_id:post.post_id
+            })
+            return thunkAPI.fulfillWithValue(response.data);
+        } catch(error){
+            return thunkAPI.rejectWithValue("Something went wrong");
+        }
+    }
+)
