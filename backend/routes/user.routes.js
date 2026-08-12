@@ -6,7 +6,8 @@ import {register,login, uploadProfilePicture,updateUserProfile,
    sendConnectionRequest,
    getMyConnectionsRequests,
    whatAreMyConnections,
-   acceptConnectionRequest} from "../controllers/user.controller.js";
+   acceptConnectionRequest,
+   getUserProfileAndUserBasedOnUsername} from "../controllers/user.controller.js";
 
 
 const router = Router();
@@ -48,4 +49,7 @@ router.route("/user/send_connection_request").post(sendConnectionRequest);
 router.route("/user/send_connection_request").get(getMyConnectionsRequests);
 router.route("/user/send_connection_request").get(whatAreMyConnections);
 router.route("/user/send_connection_request").post(acceptConnectionRequest);
+router.route("/user/get_profile_based_on_username").get(getUserProfileAndUserBasedOnUsername)
+
+
 export default router;

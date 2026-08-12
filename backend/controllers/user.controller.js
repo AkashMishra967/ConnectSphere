@@ -164,7 +164,7 @@ export const getUserAndProfile = async (req,res) =>{
 
 export const getAllUserProfile  = async(req,res)  =>{
     try{
-        const profile = await Profile.find().populate('userId',"name username email profile");
+        const profile = await Profile.find().populate('userId',"name username email profilePicture");
         return res.json({profile})
     }catch(error){
         return res.status(500).json({message: error.message})
@@ -317,5 +317,25 @@ export const commentPost = async(req,res) =>{
         return res.status(200).json({message: "Comment Added"})
     } catch(err){
         return res.status(500).json({message: err.message})
+    }
+}
+
+
+
+export const getUserProfileAndUserBasedOnUsername = async(req,res) =>{
+    const {username} = req.query;
+    try{
+        const user = await User.findOne({
+            username
+        });
+
+        if (!user){
+            return res.status(404).json({message: "user not found"})
+        }
+        const userProfile = await Profile.findOne({userId:user._id})
+            .populate("userId","name username email profilePicture")
+        return res.json({"profile":userProfile})
+    } catch(err){
+        return res.status(500).json({message:err.message})
     }
 }
