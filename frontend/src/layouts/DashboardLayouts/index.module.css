@@ -13,7 +13,9 @@
 .homeContainer__leftBar{
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.2rem;
+    align-items: flex-start;
+    border-right: 1px solid silver;
     
     
  
@@ -44,4 +46,14 @@
    width: 1.2em;
    flex-shrink: 0;
    min-width: 1.2em;
+}
+
+.homeContainer__extraContainer{
+
+border-left: 1px solid rgb(222,222,222);
+padding-left: 1.2rem;
+
+}
+.homeContainer__feedContainer{
+    padding-inline: 0.8rem;
 }

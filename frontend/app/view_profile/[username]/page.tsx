@@ -1,7 +1,5 @@
 import { BASE_URL } from '@/src/config';
-import DashboardLayout from '@/src/layouts/DashboardLayouts';
-import Userlayouts from '@/src/layouts/userlayouts';
-import styles from "./index.module.css";
+import ViewProfileClient from './ViewProfileClient';
 
 async function getProfileData(username) {
     try{
@@ -24,15 +22,5 @@ export default async function ViewProfilePage({ params }) {
         return <div>Profile not found</div>
     }
 
-    return(
-        <div>
-            {/* <img src={`${BASE_URL}/${userProfile.userId.profilePicture}`} alt="profile" /> */}
-            <Userlayouts>
-            <DashboardLayout>
-{userProfile.userId.name}
-            </DashboardLayout>
-            </Userlayouts>
-            {/* <p>@{userProfile.userId.username}</p> */}
-        </div>
-    )
+    return <ViewProfileClient userProfile={userProfile} />
 }
