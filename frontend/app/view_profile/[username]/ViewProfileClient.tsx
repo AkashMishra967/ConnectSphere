@@ -1,10 +1,10 @@
 "use client"
-import { BASE_URL } from '@/src/config';
+import clientServer, { BASE_URL } from '@/src/config';
 import DashboardLayout from '@/src/layouts/DashboardLayouts';
 import Userlayouts from '@/src/layouts/userlayouts';
 import styles from "./index.module.css";
 import { useEffect, useState } from 'react';
-// import { sendConnectionRequest } from "@/src/config/redux/action/authAction";
+import { getConnectionsRequest,sendConnectionRequest } from "@/src/config/redux/action/authAction";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '@/src/config/redux/action/postAction';
 
@@ -16,6 +16,7 @@ export default function ViewProfileClient({ userProfile }) {
 
     const [userPosts, setUserPosts] = useState([]);
     const [isCurrentUserInConnection, setIsConnection] = useState(false);
+    const [isConnectionNull, setIsConnectionNull] = useState(true);
 
     useEffect(() => {
         dispatch(getAllPosts());
@@ -30,7 +31,7 @@ export default function ViewProfileClient({ userProfile }) {
 
     const handleConnect = () => {
           console.log("Connect feature coming soon");
-        // dispatch(sendConnectionRequest({ token: localStorage.getItem("token"), connectionId: userProfile.userId._id }))
+        dispatch(sendConnectionRequest({ token: localStorage.getItem("token"), connectionId: userProfile.userId._id }))
     }
 
     return (
@@ -49,12 +50,23 @@ export default function ViewProfileClient({ userProfile }) {
                                     <h2>{userProfile.userId.name}</h2>
                                     <p style={{ color: "gray" }}>@{userProfile.userId.username}</p>
                                 </div>
-
+                            <div style={{display:"flex",alignItems:"center",gap:"1.2rem"}}>
                                 {isCurrentUserInConnection ? (
-                                    <button className={styles.connectedButton}>Connected</button>
+                                    <button className={styles.connectedButton}>{isConnectionNull ? "Pending" : "Connected" }Connected</button>
                                 ) : (
                                     <button onClick={handleConnect} className={styles.connectionBtn}>Connect</button>
                                 )}
+<div onClick={async() =>{
+    const response = await clientServer.get(`/user/download_resume?id=${userProfile.userId._id}`);
+    window.open(`${BASE_URL}/${response.data.message}`,"_blank")
+
+}} style={{cursor:"pointer"}}>
+<svg style={{width:"1.2em"}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+</svg>
+</div>
+
+                                </div>
                             </div>
                             <p>{userProfile.bio}</p>
 
@@ -80,6 +92,35 @@ export default function ViewProfileClient({ userProfile }) {
                         </div>
 
                     </div>
+
+          
+<div className='workHistory'>
+    <h4>Work History</h4>
+
+<div className={styles.workHistoryContainer}>
+    {
+        userProfile.pastWork.map((work,index) =>{
+            return(
+<div key={index} className={styles.workHistoryCard}>
+    <p style={{fontWeight:"bold",display:"flex",alignItems:"center",gap:"0.8rem"}}>{work.company} - {work.position}</p>
+    <p>{work.years}</p>
+</div>
+            )
+        })
+    }
+
+
+
+
+     </div>
+
+
+
+
+</div>
+
+
+
                 </div>
             </DashboardLayout>
         </Userlayouts>

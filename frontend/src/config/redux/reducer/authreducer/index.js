@@ -1,5 +1,5 @@
 const {createSlice} = require("@reduxjs/toolkit")
-const { loginUser, registerUser, getAboutUser, getAllUsers } = require("../../action/authAction")
+const { loginUser, registerUser, getAboutUser, getAllUsers, getConnectionsRequest, getMyConnectionRequests } = require("../../action/authAction")
 
 const initialState ={
     user:undefined,
@@ -88,6 +88,26 @@ state.message = action.payload?.message || "Something went wrong"
     state.all_profiles_fetched = true;   
     state.all_users = action.payload.profile  
 })
+
+.addCase(getConnectionsRequest.fulfilled,(state, action) =>{
+    state.connection = action.payload
+})
+.addCase(getConnectionsRequest.rejected,(state,action) =>{
+    state.message = action.payload
+})
+.addCase(getMyConnectionRequests.fulfilled,(state,action) =>{
+    state.connectionRequest = action.payload
+})
+.addCase(getMyConnectionRequests.rejected,(state,action) =>{
+    state.message = action.payload
+})
+
+
+
+
+
+
+
 
 
     }
