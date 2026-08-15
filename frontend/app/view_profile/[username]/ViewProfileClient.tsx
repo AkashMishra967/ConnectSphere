@@ -15,11 +15,10 @@ export default function ViewProfileClient({ userProfile }) {
     const authState = useSelector((state) => state.auth);
 
     const [userPosts, setUserPosts] = useState([]);
-    const [isCurrentUserInConnection, setIsConnection] = useState(false);
-    const [isConnectionNull, setIsConnectionNull] = useState(true);
 
     useEffect(() => {
         dispatch(getAllPosts());
+        dispatch(getConnectionsRequest());
     }, [dispatch]);
 
     useEffect(() => {
@@ -29,9 +28,21 @@ export default function ViewProfileClient({ userProfile }) {
         setUserPosts(posts);
     }, [postState.posts, userProfile]);
 
+    // Connection status nikalna: "none" | "pending" | "connected"
+    const existingConnection = authState.connection?.find((c) => {
+        const otherUserId = c.userId._id === authState.user?.userId?._id ? c.connectionId._id : c.userId._id;
+        return otherUserId === userProfile.userId._id;
+    });
+
+    let connectionStatus = "none";
+    if(existingConnection){
+        connectionStatus = existingConnection.status_accepted ? "connected" : "pending";
+    }
+
     const handleConnect = () => {
-          console.log("Connect feature coming soon");
-        dispatch(sendConnectionRequest({ token: localStorage.getItem("token"), connectionId: userProfile.userId._id }))
+        dispatch(sendConnectionRequest({ connectionId: userProfile.userId._id })).then(() => {
+            dispatch(getConnectionsRequest());
+        })
     }
 
     return (
@@ -51,9 +62,13 @@ export default function ViewProfileClient({ userProfile }) {
                                     <p style={{ color: "gray" }}>@{userProfile.userId.username}</p>
                                 </div>
                             <div style={{display:"flex",alignItems:"center",gap:"1.2rem"}}>
-                                {isCurrentUserInConnection ? (
-                                    <button className={styles.connectedButton}>{isConnectionNull ? "Pending" : "Connected" }Connected</button>
-                                ) : (
+                                {connectionStatus === "connected" && (
+                                    <button className={styles.connectedButton}>Connected</button>
+                                )}
+                                {connectionStatus === "pending" && (
+                                    <button className={styles.pendingButton} disabled>Pending</button>
+                                )}
+                                {connectionStatus === "none" && (
                                     <button onClick={handleConnect} className={styles.connectionBtn}>Connect</button>
                                 )}
 <div onClick={async() =>{
@@ -93,13 +108,15 @@ export default function ViewProfileClient({ userProfile }) {
 
                     </div>
 
+                    
+
           
 <div className='workHistory'>
     <h4>Work History</h4>
 
 <div className={styles.workHistoryContainer}>
     {
-        userProfile.pastWork.map((work,index) =>{
+        userProfile.pastWork?.map((work,index) =>{
             return(
 <div key={index} className={styles.workHistoryCard}>
     <p style={{fontWeight:"bold",display:"flex",alignItems:"center",gap:"0.8rem"}}>{work.company} - {work.position}</p>

@@ -18,7 +18,7 @@ app.use(express.static("uploads"))
 
 
 const start = async () =>{
-    const connectDB = await mongoose.connect("mongodb://akashmishra967033_db_user:Akash9670@ac-wob4lkq-shard-00-00.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-01.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-02.zn51gil.mongodb.net:27017/?ssl=true&replicaSet=atlas-1ayiyg-shard-0&authSource=admin&appName=Cluster0");
+    const connectDB = await mongoose.connect("mongodb://akashmishra967033_db_user:e25OXVPgmidm55Rn@ac-wob4lkq-shard-00-00.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-01.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-02.zn51gil.mongodb.net:27017/?ssl=true&replicaSet=atlas-1ayiyg-shard-0&authSource=admin&appName=Cluster0");
     app.listen(9090,() =>{
         console.log("server is running on port 9090");
     })

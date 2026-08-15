@@ -46,7 +46,8 @@ border-radius: 20px;
     height: 3.4rem;
     object-fit: cover;
 }
-.connectBtn{
+
+.connectionBtn{
     padding-inline: 0.8rem;
     padding-block: 0.3rem;
     background: rgba(3,93,183,0.905);
@@ -55,15 +56,31 @@ border-radius: 20px;
     color: white;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
 }
+
+.pendingButton{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    outline: none;
+    cursor: not-allowed;
+    border: 1px solid #f5a623;
+    color: #f5a623;
+    background: transparent;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 .connectedButton{
     padding-inline: 0.8rem;
     padding-block: 0.3rem;
     outline: none;
-    cursor: pointer;
-    border: 1px solid rgba(3,93,183,0.905);
-    color: rgba(3,93,183,0.905);
-border-radius: 10px;
+    cursor: default;
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    background: transparent;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 .workHistoryContainer{
