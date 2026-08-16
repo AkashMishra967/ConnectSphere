@@ -311,7 +311,6 @@ export const getConnectionsRequest = async (req,res) =>{
     }
 }
 
-
 export const getMyConnectionRequests = async (req,res) =>{
     const {token} = req.query;
     try{
@@ -321,7 +320,7 @@ export const getMyConnectionRequests = async (req,res) =>{
         }
         const requests = await Connection.find({
             connectionId: user._id,
-            status_accepted: false
+            status_accepted: { $ne: true }
         })
         .populate('userId','name username email profilePicture');
         return res.json(requests)
@@ -330,7 +329,6 @@ export const getMyConnectionRequests = async (req,res) =>{
         return res.status(500).json({message:err.message})
     }
 }
-
 
 export const acceptConnectionRequest = async (req, res) =>{
     const {token, requestId, action_type} = req.body;
