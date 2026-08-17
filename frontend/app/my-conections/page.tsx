@@ -82,7 +82,9 @@ dispatch(AcceptConnection({
 
 
 <h4>My Network</h4>
-{authState.connectionRequest.map((user) =><p>user.id</p>)}
+{authState.connectionRequest.map((request) => (
+  <p key={request._id}>{request.userId.name}</p>
+))}
 {authState.connectionRequest.filter((connection) => connection.status_accepted !== null ).map((user,index) =>{
 return(
 
