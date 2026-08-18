@@ -6,7 +6,7 @@ import clientServer, { BASE_URL } from "@/src/config";
 import DashboardLayout from "@/src/layouts/DashboardLayouts";
 import { getAboutUser } from "@/src/config/redux/action/authAction";
 import { getAllPosts } from "@/src/config/redux/action/postAction";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProfilePage(){
@@ -16,6 +16,8 @@ export default function ProfilePage(){
     const [userProfile, setUserProfile] = useState({})
     const [userPosts, setUserPosts] = useState([]);
     const dispatch = useDispatch();
+    const usernameRef = useRef(null);
+    const [isModalOpen,setIsModalOpen] = useState(false);
 
     useEffect(() => {
         dispatch(getAboutUser({token: localStorage.getItem("token")}))
@@ -46,6 +48,25 @@ const updateProfilePicture = async(file) =>{
     });
     dispatch(getAboutUser({token: localStorage.getItem("token")}))
 }
+
+
+const updateProfileData = async() =>{
+  const request = await clientServer.post("/user_update",{
+    token: localStorage.getItem("token"),
+    name: userProfile.userId.name,
+  });
+
+  const response = await clientServer.post("/update_profile_data",{
+    token:localStorage.getItem("token"),
+    bio: userProfile.bio,
+    currentPost: userProfile.currentPost,
+    pastWork: userProfile.pastWork,
+    education: userProfile.education
+  });
+  dispatch(getAboutUser({token:localStorage.getItem("token")}));
+}
+
+
 
 
 
@@ -85,9 +106,22 @@ const updateProfilePicture = async(file) =>{
                 {/* Name and Username */}
                 <div
                   style={{ display: "flex",width: "fit-content",alignItems: "center",gap: "1.2rem", }} >
-                  <h2>{userProfile.userId.name}</h2>
+                  <input className={styles.nameEdit} type="text" value={userProfile.userId.name}onChange={(e) =>{
+             setUserProfile({ ...userProfile, userId:{ ...userProfile.userId, name: e.target.value}})
+                  }} />
 
-                  <p style={{ color: "gray" }}>
+                  <p
+                    contentEditable
+                    suppressContentEditableWarning
+                    ref={usernameRef}
+                    onBlur={(e) => {
+                      setUserProfile({
+                        ...userProfile,
+                        userId: { ...userProfile.userId, username: e.target.innerText.replace("@", "").trim() }
+                      });
+                    }}
+                    style={{ color: "gray" }}
+                  >
                     @{userProfile.userId.username}
                   </p>
                 </div>
@@ -127,7 +161,17 @@ const updateProfilePicture = async(file) =>{
               </div>
 
               {/* Bio */}
-              <p>{userProfile.bio}</p>
+              <div>
+<textarea
+value={userProfile.bio}
+onChange={(e) =>{
+  setUserProfile({ ...userProfile, bio: e.target.value});
+}}
+row={Math.max(3,Math.ceil(userProfile.bio.length/80))}
+style={{width:"100%"}}
+/>
+
+              </div>
 
               {/* Recent Activity */}
               <div style={{ flex: "0.2rem" }}>
@@ -188,12 +232,67 @@ const updateProfilePicture = async(file) =>{
                   </div>
                 );
               })}
+
+
+<button className={styles.addWorkButton} onClick={() =>{
+
+
+}}>Add Work</button>
+
             </div>
           </div>
+
+{userProfile != authState.user &&
+<div
+  onClick={() =>{
+    updateProfileData();
+  }}
+  className={styles.updateProfileBtn}>
+  Update Profile
+</div>
+}
+
+
+
+
         </div>
 
 
             }
+
+
+
+
+
+
+{
+
+  isModalOpen &&
+  <div   
+  >
+  <div 
+  onClick={() =>{
+    console.log("clicked outside!")
+    dispath(resetPostId())
+
+  }}
+  className={styles.commentContainer}>
+    
+
+
+<div 
+onClick={(e) => e.stopPropagation()}
+
+className={styles.allCommenContainer}>
+
+  </div>
+
+</div>
+</div>
+
+}
+
+            
 
             </DashboardLayout>
         </Userlayouts>

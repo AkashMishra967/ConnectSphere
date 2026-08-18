@@ -136,3 +136,73 @@ background:black ;
 opacity: 0.8;
 
 }
+
+.profileContainer_details input{
+    outline: none;
+    border-style: none;
+    padding-inline: 10px;
+    padding-block: 9px;
+    width: fit-content;
+}
+
+.nameEdit{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.updateProfileBtn{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgba(3,93,183,0.905);
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.profileContainer_details textarea{
+    outline: none;
+    border: none;
+    padding-inline: 10px;
+    padding-block: 9px;
+    font-family: "popins" !important;
+    font-size: 1.1rem;
+}
+
+.addWorkButton{
+    border: 1px dotted silver;
+    color: black;
+    border-radius: 18px;
+    cursor: pointer;
+    padding-inline: 1.3rem;
+    background: white;
+    padding-block: 1.2rem;
+}
+
+
+.commentContainer{
+    position:fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background:rgb(0, 0, 0,0.7);
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.allCommenContainer{
+    width: 40vw;
+    height: 80vh;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
