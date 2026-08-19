@@ -136,7 +136,8 @@ border-radius: 20px;
     align-items: center;
 }
 .allCommenContainer{
-    width: 40vw;
+    /* width: 40vw; */
+    min-width: 40svw;
     height: 80vh;
     background: white;
     border-radius: 10px;
@@ -185,4 +186,28 @@ border-radius: 10px;
     text-align: center;
     cursor: pointer;
     color: white;
+} 
+
+.mobileNavBar{
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 6vh;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    align-items: center;
 }
+
+
+
+
+
+
+@media screen and (max-width: 600px){
+    .allCommenContainer{
+        width: 90%;
+    }
+}
+

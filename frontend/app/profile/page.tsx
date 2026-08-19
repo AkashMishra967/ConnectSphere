@@ -18,6 +18,16 @@ export default function ProfilePage(){
     const dispatch = useDispatch();
     const usernameRef = useRef(null);
     const [isModalOpen,setIsModalOpen] = useState(false);
+const [inputData,setInputData] = useState({company: '',position: '',years: ''});
+
+const handleWorkInputChange = (e) =>{
+  const {name, value} = e.target;
+  setInputData({ ...inputData,[name]:value});
+
+}
+
+
+
 
     useEffect(() => {
         dispatch(getAboutUser({token: localStorage.getItem("token")}))
@@ -235,8 +245,7 @@ style={{width:"100%"}}
 
 
 <button className={styles.addWorkButton} onClick={() =>{
-
-
+setIsModalOpen(true);
 }}>Add Work</button>
 
             </div>
@@ -268,12 +277,11 @@ style={{width:"100%"}}
 {
 
   isModalOpen &&
-  <div   
-  >
+  
   <div 
   onClick={() =>{
     console.log("clicked outside!")
-    dispath(resetPostId())
+    setIsModalOpen(false)
 
   }}
   className={styles.commentContainer}>
@@ -283,18 +291,25 @@ style={{width:"100%"}}
 <div 
 onClick={(e) => e.stopPropagation()}
 
-className={styles.allCommenContainer}>
+className={styles.allCommentsContainer}>
+
+<input onChange={handleWorkInputChange} name="company" className={styles.inputField} type="text" placeholder="Enter Company" />
+<input onChange={handleWorkInputChange} name="position" className={styles.inputField} type="text" placeholder="Enter position" />
+<input onChange={handleWorkInputChange} name="years" className={styles.inputField} type="number" placeholder="years" />
+<div onClick={() =>{
+  setUserProfile({ ...userProfile,pastWork:[...userProfile.pastWork,inputData]})
+  setIsModalOpen(false);
+
+}} className={styles.updateProfileBtn}>Add Work</div>
+
+
+
 
   </div>
 
 </div>
-</div>
-
 }
-
-            
-
-            </DashboardLayout>
+           </DashboardLayout>
         </Userlayouts>
     )
 }
