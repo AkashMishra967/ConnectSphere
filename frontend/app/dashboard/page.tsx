@@ -15,7 +15,7 @@ import { resetPostId } from "@/src/config/redux/reducer/authreducer/postreducer"
 export default function Dashboard(){
 
   const router = useRouter();
-  const dispath = useDispatch()
+  const dispath = useDispatch() as any
   const authState = useSelector((state: any) => state.auth)
  
 const postState = useSelector((state: any) => state.posts)
