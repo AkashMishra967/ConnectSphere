@@ -16,11 +16,13 @@ app.use(userRoutes);
 app.use(express.static("uploads"))
 
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.log("MongoDB connection error:", error);
+  }
+};
 
-const start = async () =>{
-    const connectDB = await mongoose.connect("mongodb://akashmishra967033_db_user:e25OXVPgmidm55Rn@ac-wob4lkq-shard-00-00.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-01.zn51gil.mongodb.net:27017,ac-wob4lkq-shard-00-02.zn51gil.mongodb.net:27017/?ssl=true&replicaSet=atlas-1ayiyg-shard-0&authSource=admin&appName=Cluster0");
-    app.listen(9090,() =>{
-        console.log("server is running on port 9090");
-    })
-}
-start();
+connectDB();
