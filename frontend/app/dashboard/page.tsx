@@ -16,9 +16,9 @@ export default function Dashboard(){
 
   const router = useRouter();
   const dispath = useDispatch()
-  const authState = useSelector((state) => state.auth)
+  const authState = useSelector((state: any) => state.auth)
  
-const postState = useSelector((state) => state.posts)
+const postState = useSelector((state: any) => state.posts)
 
 
 
