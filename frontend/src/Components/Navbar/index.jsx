@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "@/src/config/redux/reducer/authreducer";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function NavBarComponent() {
   const router = useRouter();
@@ -12,15 +13,22 @@ export default function NavBarComponent() {
   const dispatch = useDispatch();
 
 const authState = useSelector((state)=> state.auth)
-
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
-        <h1 style={{cursor:"pointer"}} onClick={() =>{
-          router.push("/")
-        }}>Pro Connect</h1>
+       <div className={styles.logo} style={{cursor:"pointer"}} onClick={() =>{
+  router.push("/")
+}}>
+ <Image 
+  src="/images/image.png" 
+  alt="Pro Connect Logo" 
+  width={280} 
+  height={75}
+  style={{ width: "100%", height: "auto" }}
+  priority
+/>
+</div>
         <div className={styles.navBarOptionContainer}>
-
 {authState.profileFetched && <div>
   <div style={{display:"flex",gap:"1.2rem"}}>
     {/* <p>Hey, {authState.user.userId.name}</p> */}

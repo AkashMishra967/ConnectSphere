@@ -1,18 +1,25 @@
-.container {
-  padding: 1.2rem;
 
+
+.container {
+  padding: 0.6rem 1.2rem;
 }
-.navBar{
+
+.navBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    min-height: 60px;
 }
 
-.navBarOptionContainer{
+.navBarOptionContainer {
     display: flex;
+    margin-left: auto;
+    position: relative;
+    z-index: 1;
 }
 
-.buttonJoin{
+.buttonJoin {
     background: #CD8987;
     border-radius: 10PX;
     padding-block: 0.6rem;
@@ -21,4 +28,30 @@
     font-size: 0.7rem;
     cursor: pointer;
     font-weight: bold;
+}
+
+
+.logo {
+  width: 260px;
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 180px;
+  }
+}
+@media (max-width: 768px) {
+  .navBarOptionContainer > div:first-child {
+    display: none;
+  }
 }

@@ -100,3 +100,23 @@ padding-left: 1.2rem;
         padding-bottom: 8vh;
     }
 }
+
+.settingsDropdown {
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  z-index: 100;
+}
+
+.settingsDropdown p {
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0;
+}
