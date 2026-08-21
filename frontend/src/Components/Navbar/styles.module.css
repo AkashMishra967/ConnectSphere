@@ -52,6 +52,6 @@
 }
 @media (max-width: 768px) {
   .navBarOptionContainer > div:first-child {
-    display: none;
+    display: none;;
   }
 }
