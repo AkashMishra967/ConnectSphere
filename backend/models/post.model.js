@@ -15,6 +15,11 @@ ref:"User"
         default:0
 
     },
+    likedBy:{
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "User",
+    default: []
+},
       commentsCount:{
         type:Number,
         default:0

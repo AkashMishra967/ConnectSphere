@@ -64,11 +64,27 @@ async(post_id,thunkAPI) =>{
 
 
 
+// export const incrementPostLike = createAsyncThunk(
+//     "post/increaseLike", async(post,thunkAPI) =>{
+//         try{
+//             const response = await clientServer.post('/increment_post_like',{
+//                 post_id:post.post_id
+//             })
+//             return thunkAPI.fulfillWithValue(response.data);
+//         } catch(error){
+//             return thunkAPI.rejectWithValue(error.response.data.message);
+//         }
+//     }
+// )
+
+
+
 export const incrementPostLike = createAsyncThunk(
     "post/increaseLike", async(post,thunkAPI) =>{
         try{
             const response = await clientServer.post('/increment_post_like',{
-                post_id:post.post_id
+                post_id:post.post_id,
+                token: localStorage.getItem("token")
             })
             return thunkAPI.fulfillWithValue(response.data);
         } catch(error){
