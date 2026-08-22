@@ -176,7 +176,7 @@ className={styles.singleOption_optionsContainer}>
 <p>{post.commentsCount || 0}</p>
   </div>
 
-
+{/* 
 <div onClick={async() =>{
 const text = encodeURIComponent(post.body)
 const url = encodeURIComponent("apnacollege.in");
@@ -185,6 +185,40 @@ window.open(twitterURL,"_blank")
 
 await dispath(incrementShare({post_id: post._id}))
 dispath(getAllPosts())
+
+}} */}
+
+
+{/* 
+Iske liye Web Share API use karte hain — ye browser ka built-in 
+feature hai jo mobile pe automatically OS ka native share menu khol deta hai 
+(WhatsApp, Instagram, Twitter, sab options ek saath dikhte hain, jaisa tum chahte ho). Desktop pe kuch browsers 
+support nahi karte, isliye 
+fallback bhi rakhenge (jo abhi Twitter wala hai). */}
+
+
+
+<div onClick={async() =>{
+
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title: `${post.userId.name} on Pro Connect`,
+        text: post.body,
+        url: `${window.location.origin}/view_profile/${post.userId.username}`
+      });
+    }catch(err){
+      console.log("Share cancelled or failed", err);
+    }
+  }else{
+    const text = encodeURIComponent(post.body)
+    const url = encodeURIComponent("apnacollege.in");
+    const twitterURL = `http://twitter.com/intent/tweet?text=${text}&url=${url}`;
+    window.open(twitterURL,"_blank")
+  }
+
+  await dispath(incrementShare({post_id: post._id}))
+  dispath(getAllPosts())
 
 }}
 

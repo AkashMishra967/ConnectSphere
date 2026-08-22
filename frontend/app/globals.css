@@ -4,12 +4,14 @@
   box-sizing: border-box;
 }
 
-html, body {
-  overflow-x: hidden;
+html {
   width: 100%;
   max-width: 100%;
 }
 
 body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
