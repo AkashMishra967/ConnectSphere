@@ -32,6 +32,19 @@ export default function MyConnectionPage() {
     })
   }
 
+
+const handleReject = (e, requestId) => {
+    e.stopPropagation();
+    dispatch(AcceptConnection({
+      requestId: requestId,
+      token: localStorage.getItem("token"),
+      action: "reject",
+    })).then(() => {
+      dispatch(getMyConnectionRequests({ token: localStorage.getItem("token") }));
+    })
+}
+
+
   return (
     <Userlayouts>
       <DashboardLayout>
@@ -68,16 +81,26 @@ export default function MyConnectionPage() {
                         </div>
                       )}
                     </div>
-                    <div className={styles.userInfo}>
-                      <h3>{user.userId.name}</h3>
-                      <p>@{user.userId.username}</p>
-                    </div>
-                    <button
-                      className={styles.acceptButton}
-                      onClick={(e) => handleAccept(e, user._id)}
-                    >
-                      Accept
-                    </button>
+                   
+<div className={styles.userInfo}>
+  <h3>{user.userId.name}</h3>
+  <p>@{user.userId.username}</p>
+</div>
+<div className={styles.actionButtons}>
+  <button
+    className={styles.acceptButton}
+    onClick={(e) => handleAccept(e, user._id)}
+  >
+    Accept
+  </button>
+  <button
+    className={styles.ignoreButton}
+    onClick={(e) => handleReject(e, user._id)}
+  >
+    Ignore
+  </button>
+</div>
+
                   </div>
                 ))}
               </div>
