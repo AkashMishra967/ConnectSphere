@@ -9,7 +9,6 @@ import { setTokenIsThere, setTokenIsNotThere, reset } from "@/src/config/redux/r
 import DashboardLayout from "@/src/layouts/DashboardLayouts";
 import Userlayouts from "@/src/layouts/userlayouts";
 import { BASE_URL } from "@/src/config";
-import { get } from "http";
 import { resetPostId } from "@/src/config/redux/reducer/authreducer/postreducer";
 
 export default function Dashboard(){
@@ -81,7 +80,7 @@ if(authState.user){
 <div className={styles.createPostContainer}>
 {authState?.user?.userId?.profilePicture && (
   <img className={styles.userProfile} width={200}
-    src={`${BASE_URL}/${authState.user.userId.profilePicture}`}
+    src={authState.user.userId.profilePicture}
     alt="Profile"
   />
  
@@ -114,7 +113,7 @@ value={postContent}
     <div key={post._id} className={styles.singleCard}>
 <div className={styles.singleCard_profileContainer}>
 
- <img className={styles.userProfile} src={`${BASE_URL}/${post.userId.profilePicture}`} alt="Profile" />
+ <img className={styles.userProfile} src={post.userId.profilePicture} alt="Profile" />
 <div style={{flex: 1}}>
   <div style={{display:"flex",gap:"1.2rem",justifyContent:"space-between"}}>
   <p style={{fontWeight:"bold"}}>{post.userId.name}</p>
@@ -138,10 +137,7 @@ await dispath(deletePost({post_id: post._id }))
 
 <div className={styles.singleCard_image}>
 
-
-{post.media !== ""?
-
-  <img src={`${BASE_URL}/${post.media}`} /> : <></>}
+{post.media !== ""? <img src={post.media} /> : <></>}
 </div>
 
 <div className={styles.optionsContainer}>
@@ -175,28 +171,6 @@ className={styles.singleOption_optionsContainer}>
 </svg>
 <p>{post.commentsCount || 0}</p>
   </div>
-
-{/* 
-<div onClick={async() =>{
-const text = encodeURIComponent(post.body)
-const url = encodeURIComponent("apnacollege.in");
-const twitterURL = `http://twitter.com/intent/tweet?text=${text}&url=${url} `;
-window.open(twitterURL,"_blank")
-
-await dispath(incrementShare({post_id: post._id}))
-dispath(getAllPosts())
-
-}} */}
-
-
-{/* 
-Iske liye Web Share API use karte hain — ye browser ka built-in 
-feature hai jo mobile pe automatically OS ka native share menu khol deta hai 
-(WhatsApp, Instagram, Twitter, sab options ek saath dikhte hain, jaisa tum chahte ho). Desktop pe kuch browsers 
-support nahi karte, isliye 
-fallback bhi rakhenge (jo abhi Twitter wala hai). */}
-
-
 
 <div onClick={async() =>{
 
@@ -251,7 +225,6 @@ className={styles.singleOption_optionsContainer}>
   >
   <div 
   onClick={() =>{
-    console.log("clicked outside!")
     dispath(resetPostId())
 
   }}
@@ -262,6 +235,13 @@ className={styles.singleOption_optionsContainer}>
 <div 
 onClick={(e) => e.stopPropagation()}
 className={styles.allCommenContainer}>
+
+<div className={styles.commentHeader}>
+  <h3>Comments</h3>
+  <svg onClick={() => dispath(resetPostId())} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={styles.closeIcon}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
+</div>
 
 <div className={styles.commentsListContainer}>
 
@@ -277,7 +257,7 @@ className={styles.allCommenContainer}>
 
 <div className={styles.singleComment} key={comment._id}>
   <div className={styles.singleComment_profileContainer}>
-    <img src={`${BASE_URL}/${comment.userId.profilePicture}`} alt="" />
+    <img src={comment.userId.profilePicture} alt="" />
 <div>
   <p style={{fontWeight:"bold",fontSize:"1.2rem"}}>{comment.userId.name}</p>
   <p>@{comment.userId.username}</p>

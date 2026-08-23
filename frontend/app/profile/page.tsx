@@ -100,7 +100,7 @@ const updateProfileData = async() =>{
                 }}
                 hidden type="file" id="profilePictureUpload" />
             <img
-              src={`${BASE_URL}/${userProfile.userId.profilePicture}`}
+             src={userProfile.userId.profilePicture}
               alt="profile"
             />
             

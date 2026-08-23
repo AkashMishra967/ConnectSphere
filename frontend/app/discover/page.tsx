@@ -62,7 +62,7 @@ const filteredUsers = authState.all_profiles_fetched
 
           <div className={styles.userCard_imageWrapper}>
             {user.userId.profilePicture ? (
-              <img className={styles.userCard_image} src={`${BASE_URL}/${user.userId.profilePicture}`} alt='profile' />
+              <img className={styles.userCard_image} src={user.userId.profilePicture} alt='profile' />
             ) : (
               <div className={styles.userCard_placeholder}>
                 {user.userId.name?.charAt(0).toUpperCase()}

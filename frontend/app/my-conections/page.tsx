@@ -74,7 +74,7 @@ const handleReject = (e, requestId) => {
                   >
                     <div className={styles.profilePicture}>
                       {user.userId.profilePicture ? (
-                        <img src={`${BASE_URL}/${user.userId.profilePicture}`} alt={user.userId.name} />
+                        <img src={user.userId.profilePicture} alt={user.userId.name} />
                       ) : (
                         <div className={styles.avatarPlaceholder}>
                           {user.userId.name?.charAt(0).toUpperCase()}
@@ -122,7 +122,7 @@ const handleReject = (e, requestId) => {
                   >
                     <div className={styles.profilePicture}>
                       {user.userId.profilePicture ? (
-                        <img src={`${BASE_URL}/${user.userId.profilePicture}`} alt={user.userId.name} />
+                        <img src={user.userId.profilePicture} alt={user.userId.name} />
                       ) : (
                         <div className={styles.avatarPlaceholder}>
                           {user.userId.name?.charAt(0).toUpperCase()}

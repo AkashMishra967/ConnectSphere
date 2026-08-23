@@ -123,6 +123,8 @@ border-radius: 20px;
 }
 
 
+/* ===== Comment Modal - Professional Styling ===== */
+
 .commentContainer{
     position:fixed;
     width: 100vw;
@@ -130,64 +132,162 @@ border-radius: 20px;
     top: 0;
     left: 0;
     z-index: 2;
-    background:rgb(0, 0, 0,0.7);
+    background:rgba(0, 0, 0, 0.6);
     overflow: hidden;
     justify-content: center;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(2px);
 }
+
 .allCommenContainer{
-    /* width: 40vw; */
     min-width: 40svw;
+    max-width: 500px;
+    width: 100%;
     height: 80vh;
     background: white;
-    border-radius: 10px;
+    border-radius: 16px;
     position: relative;
-    padding: 1.4rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.commentHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.4rem;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.commentHeader h3{
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.closeIcon{
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+}
+
+.closeIcon:hover{
+    color: #1a1a1a;
 }
 
 .commentsListContainer{
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 1rem;
+    padding: 1rem 1.4rem;
 }
-.postCommentContainer{
 
-    position: absolute;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    width: 90%;
+.commentsListContainer h2{
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding-top: 2rem;
+}
+
+.singleComment{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.singleComment:last-child{
+    border-bottom: none;
+}
+
+.singleComment_profileContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1.2rem;
+    gap: 0.8rem;
+}
+
+.singleComment_profileContainer img{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.singleComment_profileContainer h4{
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.singleComment_profileContainer p{
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.singleComment > p{
+    font-size: 0.92rem;
+    color: #333;
+    padding-left: 3rem;
+    line-height: 1.4;
+}
+
+.postCommentContainer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.4rem;
+    border-top: 1px solid #eee;
+    background: white;
+    flex-shrink: 0;
 }
 
 .postCommentContainer>input{
-    flex: 0.9;
-padding-inline: 1.5rem;
-padding-block: 1.2rem;
-outline: none;
-border: none;
-background-color: rgb(288, 288, 288);
-border-radius: 10px;
+    flex: 1;
+    padding: 0.75rem 1.2rem;
+    outline: none;
+    border: 1px solid #e0e0e0;
+    background-color: #f7f7f8;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    transition: border 0.2s, background 0.2s;
+}
 
-}
 .postCommentContainer>input:focus{
-    border: 1px solid silver;
+    border: 1px solid rgb(0,59,130);
+    background: white;
 }
+
 .postCommentContainer_commentBtn{
-    flex:0.1;
-    width: fit-content;
-    padding: 1.2rem;
-    background: orange;
-    border-radius:10px ;
+    flex-shrink: 0;
+    padding: 0.7rem 1.4rem;
+    background: rgb(0,59,130);
+    border-radius: 999px;
     text-align: center;
     cursor: pointer;
     color: white;
-} 
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: background 0.2s;
+}
+
+.postCommentContainer_commentBtn:hover{
+    background: rgb(3,93,183);
+}
+
+/* ===== End Comment Modal ===== */
 
 
 .mobileNavBar{
@@ -207,7 +307,19 @@ border-radius: 10px;
 
 @media screen and (max-width: 600px){
     .allCommenContainer{
-        width: 90%;
+        width: 92%;
+        max-width: 92%;
+        height: 85vh;
+        border-radius: 16px;
+    }
+    .commentHeader{
+        padding: 1rem;
+    }
+    .commentsListContainer{
+        padding: 0.8rem 1rem;
+    }
+    .postCommentContainer{
+        padding: 0.8rem 1rem;
     }
 }
 
@@ -343,27 +455,8 @@ background: white;
         font-size: 12px;
     }
 
-    /* Comment popup */
-    .allCommenContainer {
-        width: 90%;
-        min-width: 0;
-        max-width: 90%;
-        height: 80vh;
-        box-sizing: border-box;
-    }
-
-    .postCommentContainer {
-        width: calc(100% - 2.4rem);
-        gap: 8px;
-    }
-
     .postCommentContainer > input {
         min-width: 0;
-        padding: 10px;
-    }
-
-    .postCommentContainer_commentBtn {
-        padding: 10px;
     }
 
     /* Mobile bottom navbar */
@@ -377,4 +470,3 @@ background: white;
     display: flex;
 }
 }
-

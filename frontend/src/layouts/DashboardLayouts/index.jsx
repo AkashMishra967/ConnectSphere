@@ -66,20 +66,33 @@ router.push("/my-conections")
  <div className={styles.homeContainer__feedContainer}>
 {children}
  </div>
-<div className={styles.homeContainer__extraContainer}>
-<h3>Top Profile</h3>
 
-{authState.all_profiles_fetched && authState.all_users.map((profile) =>{
+<div className={styles.homeContainer__extraContainer}>
+<h3 className={styles.extraContainer_heading}>Top Profile</h3>
+
+{authState.all_profiles_fetched && authState.all_users.slice(0, 5).map((profile) =>{
 
 return(
-  <div key={profile._id} className={styles.extraContainer_profile}>
-<p>{profile.userId.name}</p>
-
-</div>
+  <div 
+    key={profile._id} 
+    className={styles.extraContainer_profile}
+    onClick={() => router.push(`/view_profile/${profile.userId.username}`)}
+  >
+    {profile.userId.profilePicture ? (
+      <img className={styles.extraContainer_profileImg} src={profile.userId.profilePicture} alt={profile.userId.name} />
+    ) : (
+      <div className={styles.extraContainer_avatarPlaceholder}>
+        {profile.userId.name?.charAt(0).toUpperCase()}
+      </div>
+    )}
+    <div className={styles.extraContainer_profileInfo}>
+      <p className={styles.extraContainer_profileName}>{profile.userId.name}</p>
+      <p className={styles.extraContainer_profileUsername}>@{profile.userId.username}</p>
+    </div>
+  </div>
 )
 })}
 </div>
-
 
 </div>
      </div>

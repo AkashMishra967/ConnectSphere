@@ -81,7 +81,7 @@ export default function ViewProfileClient({ userProfile }) {
           <div className={styles.backDropContainer}>
             <img
               className={styles.backDrop}
-              src={`${BASE_URL}/${userProfile.userId.profilePicture}`}
+              src={userProfile.userId.profilePicture}
               alt="profile"
             />
           </div>
@@ -197,10 +197,7 @@ export default function ViewProfileClient({ userProfile }) {
                           }
                         >
                           {post.media !== "" && (
-                            <img
-                              src={`${BASE_URL}/${post.media}`}
-                              alt=""
-                            />
+                            <img src={post.media} alt='' />
                           )}
                         </div>
 

@@ -93,7 +93,7 @@ export const uploadProfilePicture = async (req, res) => {
         if(!user) {
             return res.status(404).json({message:"user not found"});
         }
-        user.profilePicture = req.file.filename;
+       user.profilePicture = req.file.path;
  await user.save();
  return res.json({message: "Profile picture uppated"});
 
