@@ -430,8 +430,6 @@ background: white;
 .singleCard_image > img {
     width: 100%;
     max-height: 300px;
-    position: relative;
-    right: 50px;
     min-height: 180px;
     object-fit: cover;
     object-position: center;
