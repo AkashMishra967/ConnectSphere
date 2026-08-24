@@ -128,66 +128,66 @@ export const updateUserProfile = async (req,res) =>{
 }
 
 
-// export const getUserAndProfile = async (req,res) =>{
-//     try{
-//         const {token} = req.query;
-//         const user = await User.findOne({token:token});
-//         if(!user){
-//             return res.status(404).json({message: "user not found"});
-//         }
-//         const userProfile = await Profile.findOne({userId: user._id})
-//     .populate('userId', 'name email username profilePicture');
-//  return res.json(userProfile)
+export const getUserAndProfile = async (req,res) =>{
+    try{
+        const {token} = req.query;
+        const user = await User.findOne({token:token});
+        if(!user){
+            return res.status(404).json({message: "user not found"});
+        }
+        const userProfile = await Profile.findOne({userId: user._id})
+    .populate('userId', 'name email username profilePicture');
+ return res.json(userProfile)
     
-//     }
-//     catch(error){
-//         return res.status(500).json({message:error.message})
-//     }
-// }
-
-
-
-export const getUserAndProfile = async (req, res) => {
-    try {
-        const { token } = req.query;
-
-        const user = await User.findOne({ token: token });
-
-        if (!user) {
-            return res.status(404).json({
-                message: "user not found"
-            });
-        }
-
-        let userProfile = await Profile.findOne({
-            userId: user._id
-        });
-
-        // Agar profile nahi hai to create karo
-        if (!userProfile) {
-            userProfile = new Profile({
-                userId: user._id
-            });
-
-            await userProfile.save();
-        }
-
-        // User data ke saath profile return karo
-        userProfile = await Profile.findOne({
-            userId: user._id
-        }).populate(
-            "userId",
-            "name email username profilePicture"
-        );
-
-        return res.json(userProfile);
-
-    } catch (error) {
-        return res.status(500).json({
-            message: error.message
-        });
     }
-};
+    catch(error){
+        return res.status(500).json({message:error.message})
+    }
+}
+
+
+
+// export const getUserAndProfile = async (req, res) => {
+//     try {
+//         const { token } = req.query;
+
+//         const user = await User.findOne({ token: token });
+
+//         if (!user) {
+//             return res.status(404).json({
+//                 message: "user not found"
+//             });
+//         }
+
+//         let userProfile = await Profile.findOne({
+//             userId: user._id
+//         });
+
+//         // Agar profile nahi hai to create karo
+//         if (!userProfile) {
+//             userProfile = new Profile({
+//                 userId: user._id
+//             });
+
+//             await userProfile.save();
+//         }
+
+//         // User data ke saath profile return karo
+//         userProfile = await Profile.findOne({
+//             userId: user._id
+//         }).populate(
+//             "userId",
+//             "name email username profilePicture"
+//         );
+
+//         return res.json(userProfile);
+
+//     } catch (error) {
+//         return res.status(500).json({
+//             message: error.message
+//         });
+//     }
+// };
 
 
 
