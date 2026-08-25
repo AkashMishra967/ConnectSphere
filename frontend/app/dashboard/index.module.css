@@ -324,8 +324,8 @@ margin-top: 12px;
         padding: 0.7rem 0.9rem;
     }
     .hiddenOnMobile{
-        display: none;
-    }
+    display: none !important;
+}
 }
 
 
