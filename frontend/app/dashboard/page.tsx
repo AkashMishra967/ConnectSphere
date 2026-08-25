@@ -257,7 +257,20 @@ className={styles.allCommenContainer}>
 
 <div className={styles.singleComment} key={comment._id}>
   <div className={styles.singleComment_profileContainer}>
-    <img src={comment.userId.profilePicture} alt="" />
+    {/* <img src={comment.userId.profilePicture} alt="" /> */}
+<img 
+  src={comment.userId.profilePicture} 
+  alt="" 
+  onError={(e) => {
+    e.target.onerror = null;
+    e.target.style.display = "none";
+    e.target.nextSibling.style.display = "flex";
+  }}
+/>
+<div style={{display:"none", width:"38px", height:"38px", borderRadius:"50%", background:"linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))", color:"white", alignItems:"center", justifyContent:"center", fontWeight:"bold"}}>
+  {comment.userId.name?.charAt(0).toUpperCase()}
+</div>
+
 <div>
   <p style={{fontWeight:"bold",fontSize:"1.2rem"}}>{comment.userId.name}</p>
   <p>@{comment.userId.username}</p>
