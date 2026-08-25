@@ -304,25 +304,24 @@ border-radius: 20px;
 }
 
 
-
-
 @media screen and (max-width: 600px){
     .allCommenContainer{
-        width: 92%;
-        max-width: 92%;
-        height: 85vh;
+        width: 88%;
+        max-width: 88%;
+        height: 65vh;
         border-radius: 16px;
     }
     .commentHeader{
-        padding: 1rem;
+        padding: 0.9rem;
     }
     .commentsListContainer{
-        padding: 0.8rem 1rem;
+        padding: 0.7rem 0.9rem;
     }
     .postCommentContainer{
-        padding: 0.8rem 1rem;
+        padding: 0.7rem 0.9rem;
     }
 }
+
 
 
 @media screen and (max-width: 600px) {
