@@ -77,7 +77,7 @@ if(authState.user){
 <div className={styles.wrapper}>
 
 
-<div className={styles.createPostContainer}>
+<div className={`${styles.createPostContainer} ${postState.postId !== "" ? styles.hiddenOnMobile : ""}`}>
 {authState?.user?.userId?.profilePicture && (
   <img className={styles.userProfile} width={200}
     src={authState.user.userId.profilePicture}
