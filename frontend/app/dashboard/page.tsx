@@ -270,11 +270,11 @@ className={styles.allCommenContainer}>
 <div style={{display:"none", width:"38px", height:"38px", borderRadius:"50%", background:"linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))", color:"white", alignItems:"center", justifyContent:"center", fontWeight:"bold"}}>
   {comment.userId.name?.charAt(0).toUpperCase()}
 </div>
-
+{/* 
 <div>
   <p style={{fontWeight:"bold",fontSize:"1.2rem"}}>{comment.userId.name}</p>
   <p>@{comment.userId.username}</p>
-  </div>
+  </div> */}
 </div>
 <p>
 {comment.body}
