@@ -6,33 +6,389 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import PDFDocument from "pdfkit";
 import fs from "fs";
+import path from "path";
 import mongoose from "mongoose";
 
 
-const convertUserDataTOPDF = async (userData) =>{
-    const doc = new PDFDocument();
+// const convertUserDataTOPDF = async (userData) =>{
+//     const doc = new PDFDocument();
 
-    const outputPath = crypto.randomBytes(32).toString("hex")+".pdf";
-    const stream = fs.createWriteStream("uploads/"+outputPath);
-    doc.pipe(stream);
+//     const outputPath = crypto.randomBytes(32).toString("hex")+".pdf";
+//     const stream = fs.createWriteStream("uploads/"+outputPath);
+//     doc.pipe(stream);
 
-    doc.image(`uploads/${userData.userId.profilePicture}`,{align:"center",width:100})
-    doc.fontSize(14).text(`Name: ${userData.userId.name}`);
-    doc.fontSize(14).text(`UserName: ${userData.userId.username}`);
-    doc.fontSize(14).text(`Email: ${userData.userId.email}`);
-    doc.fontSize(14).text(`Bio: ${userData.bio}`);
-    doc.fontSize(14).text(`Current Position: ${userData.currentPost}`);
+//     doc.image(`uploads/${userData.userId.profilePicture}`,{align:"center",width:100})
+//     doc.fontSize(14).text(`Name: ${userData.userId.name}`);
+//     doc.fontSize(14).text(`UserName: ${userData.userId.username}`);
+//     doc.fontSize(14).text(`Email: ${userData.userId.email}`);
+//     doc.fontSize(14).text(`Bio: ${userData.bio}`);
+//     doc.fontSize(14).text(`Current Position: ${userData.currentPost}`);
 
-    doc.fontSize(14).text("Past Work");
-    (userData.pastWork || []).forEach((work, index) =>{
-        doc.fontSize(14).text(`Company Name: ${work.company}`);
-        doc.fontSize(14).text(`Position: ${work.position}`);
-        doc.fontSize(14).text(`Years: ${work.years}`);
-    })
-    doc.end();
-    return outputPath;
+//     doc.fontSize(14).text("Past Work");
+//     (userData.pastWork || []).forEach((work, index) =>{
+//         doc.fontSize(14).text(`Company Name: ${work.company}`);
+//         doc.fontSize(14).text(`Position: ${work.position}`);
+//         doc.fontSize(14).text(`Years: ${work.years}`);
+//     })
+//     doc.end();
+//     return outputPath;
 
-}
+// }
+
+
+
+
+
+const convertUserDataTOPDF = async (userData) => {
+
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            const uploadDir = path.join(process.cwd(), "uploads");
+
+            // uploads folder nahi hai to create kar do
+            if (!fs.existsSync(uploadDir)) {
+                fs.mkdirSync(uploadDir, {
+                    recursive: true
+                });
+            }
+
+
+            // PDF ka unique name
+            const outputPath =
+                crypto.randomBytes(32).toString("hex") + ".pdf";
+
+
+            const fullOutputPath =
+                path.join(uploadDir, outputPath);
+
+
+            const doc = new PDFDocument({
+                margin: 50
+            });
+
+
+            const stream =
+                fs.createWriteStream(fullOutputPath);
+
+
+            // Stream error
+            stream.on("error", (error) => {
+                reject(error);
+            });
+
+
+            // PDF complete hone ke baad hi resolve
+            stream.on("finish", () => {
+                resolve(outputPath);
+            });
+
+
+            doc.pipe(stream);
+
+
+            // =========================================
+            // PROFILE IMAGE
+            // =========================================
+
+            try {
+
+                const profilePicture =
+                    userData?.userId?.profilePicture;
+
+
+                if (profilePicture) {
+
+                    /*
+                     * Agar Cloudinary / HTTP URL hai
+                     */
+
+                    if (
+                        profilePicture.startsWith("http://") ||
+                        profilePicture.startsWith("https://")
+                    ) {
+
+                        try {
+
+                            const imageResponse =
+                                await fetch(profilePicture);
+
+
+                            if (imageResponse.ok) {
+
+                                const imageBuffer =
+                                    Buffer.from(
+                                        await imageResponse.arrayBuffer()
+                                    );
+
+
+                                doc.image(
+                                    imageBuffer,
+                                    {
+                                        align: "center",
+                                        width: 100
+                                    }
+                                );
+
+                            }
+
+                        } catch (imageError) {
+
+                            console.log(
+                                "Profile image download failed:",
+                                imageError.message
+                            );
+
+                        }
+
+                    }
+
+                    /*
+                     * Agar purani local image hai
+                     */
+
+                    else {
+
+                        let imagePath =
+                            profilePicture;
+
+
+                        if (
+                            !path.isAbsolute(imagePath)
+                        ) {
+
+                            imagePath =
+                                path.join(
+                                    process.cwd(),
+                                    imagePath
+                                );
+
+                        }
+
+
+                        if (
+                            fs.existsSync(imagePath)
+                        ) {
+
+                            doc.image(
+                                imagePath,
+                                {
+                                    align: "center",
+                                    width: 100
+                                }
+                            );
+
+                        }
+
+                    }
+
+                }
+
+            } catch (imageError) {
+
+                /*
+                 * Image mein problem ho to
+                 * PDF banana band nahi hoga.
+                 */
+
+                console.log(
+                    "Profile image error:",
+                    imageError.message
+                );
+
+            }
+
+
+            // =========================================
+            // PERSONAL INFORMATION
+            // =========================================
+
+            doc.moveDown();
+
+
+            doc.fontSize(20)
+                .text(
+                    userData?.userId?.name ||
+                    "User",
+                    {
+                        align: "center"
+                    }
+                );
+
+
+            doc.moveDown(0.5);
+
+
+            doc.fontSize(11)
+                .fillColor("#555555")
+                .text(
+                    `@${userData?.userId?.username || ""}`,
+                    {
+                        align: "center"
+                    }
+                );
+
+
+            doc.moveDown();
+
+
+            doc.fillColor("#000000");
+
+
+            doc.fontSize(12)
+                .text(
+                    `Email: ${
+                        userData?.userId?.email ||
+                        "Not provided"
+                    }`
+                );
+
+
+            doc.moveDown(0.5);
+
+
+            // =========================================
+            // BIO
+            // =========================================
+
+            doc.fontSize(15)
+                .text("About");
+
+
+            doc.moveDown(0.3);
+
+
+            doc.fontSize(11)
+                .text(
+                    userData?.bio ||
+                    "No bio added."
+                );
+
+
+            doc.moveDown();
+
+
+            // =========================================
+            // CURRENT POSITION
+            // =========================================
+
+            doc.fontSize(15)
+                .text("Current Position");
+
+
+            doc.moveDown(0.3);
+
+
+            doc.fontSize(11)
+                .text(
+                    userData?.currentPost ||
+                    "Not provided."
+                );
+
+
+            doc.moveDown();
+
+
+            // =========================================
+            // WORK HISTORY
+            // =========================================
+
+            doc.fontSize(15)
+                .text("Work History");
+
+
+            doc.moveDown(0.5);
+
+
+            const pastWork =
+                userData?.pastWork || [];
+
+
+            if (pastWork.length === 0) {
+
+                doc.fontSize(11)
+                    .text(
+                        "No work experience added."
+                    );
+
+            } else {
+
+                pastWork.forEach(
+                    (work, index) => {
+
+                        doc.fontSize(12)
+                            .text(
+                                `${index + 1}. ${
+                                    work?.position ||
+                                    "Position"
+                                }`
+                            );
+
+
+                        doc.fontSize(11)
+                            .text(
+                                `Company: ${
+                                    work?.company ||
+                                    "Not provided"
+                                }`
+                            );
+
+
+                        doc.fontSize(11)
+                            .text(
+                                `Duration: ${
+                                    work?.years ||
+                                    "Not provided"
+                                }`
+                            );
+
+
+                        doc.moveDown(0.7);
+
+                    }
+                );
+
+            }
+
+
+            // =========================================
+            // FOOTER
+            // =========================================
+
+            doc.moveDown();
+
+
+            doc.fontSize(9)
+                .fillColor("#777777")
+                .text(
+                    "Generated by ProConnect",
+                    {
+                        align: "center"
+                    }
+                );
+
+
+            // PDF finish
+            doc.end();
+
+
+        } catch (error) {
+
+            reject(error);
+
+        }
+
+    });
+
+};
+
+
+
+
+
+
+
 
 export const register = async (req, res) =>{
 
@@ -218,16 +574,63 @@ export const getAllUserProfile  = async(req,res)  =>{
     }
 }
 
+export const downloadProfile = async (req, res) => {
+    try {
+        const user_id = req.query.id;
+        // ID nahi mili
+        if (!user_id) {
+            return res.status(400).json({
+                message: "User id is required"
+            });
 
-export const downloadProfile = async(req,res) =>{
-    const user_id = req.query.id;
+        }
+        // Profile find karo
+        const userProfile =
+            await Profile.findOne({
+                userId: user_id
+            }).populate(
+                "userId",
+                "name username email profilePicture"
+            );
+        // Profile nahi mila
+        if (!userProfile) {
+            return res.status(404).json({
+                message: "User profile not found"
+            });
+        }
+        // User populate nahi hua
+        if (!userProfile.userId) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        // PDF create karo
+        const outputPath =
+            await convertUserDataTOPDF(
+                userProfile
+            );
+        console.log(
+            "Resume generated:",
+            outputPath
+        );
+        // Frontend ko same response format
+        return res.json({
+            message: outputPath
+        });
+    } catch (error) {
 
-    const userProfile = await Profile.findOne({userId: user_id})
-    .populate("userId", "name username email profilePicture");
-
-    let outputPath = await convertUserDataTOPDF(userProfile);
-    return res.json({"message": outputPath})
-}
+        console.error(
+            "DOWNLOAD RESUME ERROR:",
+            error
+        );
+        return res.status(500).json({
+            message:
+                "Resume generation failed",
+            error:
+                error.message
+        });
+    }
+};
 
 
 
