@@ -1,233 +1,1207 @@
-.container{
-    padding: 1.3rem;
-    background: rgb(255,253,253);
- display: flex;
- flex-direction: column;
- gap: 1.2rem;
+/* =========================================
+   MAIN CONTAINER
+========================================= */
 
-
-}
-
-
-.backDropContainer{
+.container {
     width: 100%;
-    height: 30vh;
-    background: url(" data:image/jpeg;base64,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");
-background-size: cover;
-background-repeat: no-repeat;
-position: relative;
-border-radius: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
 }
-.backDropContainer img{
-    width: 10em;
-    height: 10em;
+
+
+/* =========================================
+   COVER
+========================================= */
+
+.coverSection {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    border-radius: 20px;
+    overflow: visible;
+}
+
+.coverImage {
+    width: 100%;
+    height: 100%;
+    display: block;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 20px;
+}
+
+.coverOverlay {
     position: absolute;
-    bottom: -30%;
-    left: 8%;
-    text-align: center;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.02),
+        rgba(0, 0, 0, 0.18)
+    );
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    padding: 18px;
+    box-sizing: border-box;
+
+    pointer-events: none;
 }
-.profileContainer_details{
 
-    padding-top: 6.6rem;
+.coverOverlay span {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #333;
 }
 
 
-.postCard{
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+/* =========================================
+   PROFILE PICTURE
+========================================= */
+
+.profilePictureWrapper {
+    position: absolute;
+    left: 50px;
+    bottom: -70px;
+
+    width: 145px;
+    height: 145px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    border: 5px solid white;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+
+    background: white;
 }
 
-.card{
+.profilePicture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profilePictureOverlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.58);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+
+    opacity: 0;
+
+    transition: 0.25s ease;
+}
+
+.profilePictureWrapper:hover
+.profilePictureOverlay {
+    opacity: 1;
+}
+
+
+/* =========================================
+   MAIN PROFILE AREA
+========================================= */
+
+.profileMainSection {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(300px, 0.8fr);
+
+    gap: 24px;
+
+    margin-top: 48px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   PROFILE INFO CARD
+========================================= */
+
+.profileInfoCard {
+    background: white;
+
+    border: 1px solid #e9e9e9;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+
+    min-width: 0;
+}
+
+
+/* =========================================
+   IDENTITY
+========================================= */
+
+.profileIdentity {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.8rem;
+
+    gap: 5px;
+
+    padding-bottom: 24px;
+
+    border-bottom: 1px solid #eeeeee;
 }
 
-
-
-
-
-
-.card_profileContainer>img{
-    width: 3.4rem;
-    height: auto;
-    object-fit: cover;
-}
-
-
-
-
-
-.card_profileContainer{
+.nameEdit {
     width: 100%;
-}
 
-.card_profileContainer img{
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-
-.connectionBtn{
-    padding-inline: 0.8rem;
-    padding-block: 0.3rem;
-    background: rgba(3,93,183,0.905);
-    outline: none;
     border: none;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.pendingButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.3rem;
     outline: none;
-    cursor: not-allowed;
-    border: 1px solid #f5a623;
-    color: #f5a623;
+
+    padding: 0;
+
     background: transparent;
-    border-radius: 10px;
-    font-weight: bold;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+    box-sizing: border-box;
 }
 
-.connectedButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.3rem;
+.username {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
     outline: none;
-    cursor: default;
-    border: 1px solid #2ecc71;
-    color: #2ecc71;
-    background: transparent;
-    border-radius: 10px;
-    font-weight: bold;
 }
 
-.workHistoryContainer{
-    display: flex;
-    gap: 1.4rem;
-    padding-top: 1.4rem;
-    width: 100%;
-    flex-wrap: wrap;
+.resumeButton {
+    margin-top: 12px;
 
-}
-.workHistoryCard{
-    min-width: fit-content;
-    padding-inline: 2.5rem;
-    padding-block: 1rem;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgb(173,173,173);
-}
-
-.backDrop_overlay{
-    width:10em ;
-    height: 10em;
-    object-fit: cover;
-    border-radius: 50%;
-    position: absolute;
-    top: 116px;
-    left: 8%;
-    text-align: center;
-    z-index: 4;
-    transition: all 0.4s;
-    cursor: pointer;
-    color: white;
-    opacity: 0.0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-.backDrop_overlay:hover{
-background:black ;
-opacity: 0.8;
-
-}
-
-.profileContainer_details input{
-    outline: none;
-    border-style: none;
-    padding-inline: 10px;
-    padding-block: 9px;
-    width: fit-content;
-}
-
-.nameEdit{
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.updateProfileBtn{
-    padding-inline: 0.8rem;
-    padding-block: 0.3rem;
-    background: rgba(3,93,183,0.905);
-    outline: none;
-    border: none;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    width: fit-content;
-}
-
-.profileContainer_details textarea{
-    outline: none;
-    border: none;
-    padding-inline: 10px;
-    padding-block: 9px;
-    font-family: "popins" !important;
-    font-size: 1.1rem;
-}
-
-.addWorkButton{
-    border: 1px dotted silver;
-    color: black;
-    border-radius: 18px;
-    cursor: pointer;
-    padding-inline: 1.3rem;
-    background: white;
-    padding-block: 1.2rem;
-}
-
-
-.commentContainer{
-    position:fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    background:rgb(0, 0, 0,0.7);
-    overflow: hidden;
-    justify-content: center;
     display: flex;
     align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid #dbe4f0;
+
+    background: #f8fbff;
+
+    color: #0563c1;
+
+    border-radius: 8px;
+
+    padding: 9px 14px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
 }
-.allCommentsContainer{
-    width: 40vw;
-    height:fit-content;
-    background: white;
-    border-radius: 10px;
-    position: relative;
-    padding: 1.4rem;
+
+.resumeButton:hover {
+    background: #eef6ff;
+
+    border-color: #b8d5f3;
+}
+
+.resumeButton svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================
+   BIO
+========================================= */
+
+.bioSection {
+    margin-top: 24px;
+}
+
+.sectionHeading {
     display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.sectionHeading h3 {
+    margin: 0;
+
+    font-size: 18px;
+
+    color: #111827;
+}
+
+.sectionHeading span {
+    font-size: 12px;
+
+    color: #6b7280;
+
+    background: #f3f4f6;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+}
+
+.bioTextarea {
+    width: 100%;
+
+    min-height: 125px;
+
+    resize: vertical;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    border: 1px solid #e2e5e9;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    background: #fafafa;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #374151;
+
+    transition: 0.2s ease;
+}
+
+.bioTextarea:focus {
+    background: white;
+
+    border-color: #1677d2;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            22,
+            119,
+            210,
+            0.08
+        );
+}
+
+.bioTextarea::placeholder {
+    color: #9ca3af;
+}
+
+.bioHint {
+    margin: 7px 0 0;
+
+    font-size: 12px;
+
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   RECENT ACTIVITY
+========================================= */
+
+.activityCard {
+    background: white;
+
+    border: 1px solid #e9e9e9;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+
+    min-width: 0;
+}
+
+.postsList {
+    display: flex;
+
     flex-direction: column;
-    gap: 1.2rem;
+
+    gap: 14px;
+}
+
+.postCard {
+    border: 1px solid #eeeeee;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+.postImage {
+    width: 100%;
+
+    max-height: 230px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.postText {
+    margin: 0;
+
+    padding: 14px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #374151;
+
+    word-break: break-word;
+}
+
+.emptyActivity {
+    text-align: center;
+
+    padding: 35px 15px;
+
+    border: 1px dashed #dddddd;
+
+    border-radius: 12px;
+}
+
+.emptyIcon {
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.emptyActivity h4 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+}
+
+.emptyActivity p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
 }
 
 
-.inputField{
-    padding-inline: 1.3rem;
-    padding-block: 0.8rem;
-    outline: none;
-    border-radius: 10px;
-    border: 1px solid silver;
+/* =========================================
+   WORK HISTORY
+========================================= */
+
+.workSection {
+    background: white;
+
+    border: 1px solid #e9e9e9;
+
+    border-radius: 16px;
+
+    padding: 26px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.workHeader {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.workHeader h3 {
+    margin: 0;
+
+    font-size: 20px;
+
+    color: #111827;
+}
+
+.workHeader p {
+    margin: 5px 0 0;
+
+    color: #8b929b;
+
+    font-size: 13px;
+}
+
+.addWorkButton {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 15px;
+
+    border: 1px solid #cfd8e3;
+
+    background: white;
+
+    border-radius: 9px;
+
+    color: #075eaf;
+
+    font-weight: 600;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.addWorkButton:hover {
+    background: #f4f9ff;
+
+    border-color: #9fc5ed;
+}
+
+.addWorkButton span {
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   WORK CARDS
+========================================= */
+
+.workHistoryContainer {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
+    gap: 16px;
+
     width: 100%;
+}
+
+.workHistoryCard {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    padding: 20px;
+
+    border: 1px solid #e8ebef;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+.workHistoryCard:hover {
+    transform: translateY(-2px);
+
+    border-color: #cfdff0;
+
+    box-shadow:
+        0 8px 20px rgba(
+            0,
+            0,
+            0,
+            0.07
+        );
+}
+
+.workIcon {
+    width: 43px;
+    height: 43px;
+
+    min-width: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #edf6ff;
+
+    font-size: 20px;
+}
+
+.workDetails {
+    min-width: 0;
+
+    padding-right: 20px;
+}
+
+.workDetails h4 {
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #111827;
+
+    line-height: 1.4;
+}
+
+.companyName {
+    margin: 4px 0;
+
+    font-size: 14px;
+
+    color: #2563a8;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+.workYears {
+    display: inline-block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: #737b86;
+
+    background: #f3f4f6;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+}
+
+.deleteWorkButton {
+    position: absolute;
+
+    right: 12px;
+    top: 12px;
+
+    width: 26px;
+    height: 26px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #9ca3af;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+}
+
+.deleteWorkButton:hover {
+    background: #fff0f0;
+
+    color: #e53935;
+}
+
+
+/* =========================================
+   EMPTY WORK
+========================================= */
+
+.emptyWork {
+    border: 1px dashed #d8dde3;
+
+    border-radius: 12px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #fafbfc;
+}
+
+.emptyWork > div {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.emptyWork h4 {
+    margin: 0 0 6px;
+
+    font-size: 15px;
+
+    color: #374151;
+}
+
+.emptyWork p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   UPDATE BUTTON
+========================================= */
+
+.updateSection {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+.updateProfileBtn {
+    border: none;
+
+    outline: none;
+
+    background: #0569bd;
+
+    color: white;
+
+    border-radius: 9px;
+
+    padding: 11px 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 5px 12px rgba(
+            5,
+            105,
+            189,
+            0.18
+        );
+}
+
+.updateProfileBtn:hover {
+    background: #04599f;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modalOverlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background: rgba(
+        15,
+        23,
+        42,
+        0.65
+    );
+
+    backdrop-filter: blur(4px);
+}
+
+.modalContainer {
+    width: 100%;
+
+    max-width: 500px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    overflow: hidden;
+
+    animation:
+        modalOpen 0.2s ease;
+}
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px)
+                   scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+                   scale(1);
+    }
+}
+
+.modalHeader {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 22px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.modalHeader h3 {
+    margin: 0;
+
+    font-size: 19px;
+
+    color: #111827;
+}
+
+.modalHeader p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    color: #8a919b;
+}
+
+.closeModalButton {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    color: #555;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+.closeModalButton:hover {
+    background: #e5e7eb;
+}
+
+.modalBody {
+    padding: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+.formGroup {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.formGroup label {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.inputField {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border-radius: 9px;
+
+    border: 1px solid #d9dde3;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.inputField:focus {
+    border-color: #1677d2;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            22,
+            119,
+            210,
+            0.08
+        );
+}
+
+.modalAddButton {
+    width: 100%;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 12px;
+
+    background: #0569bd;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modalAddButton:hover {
+    background: #04599f;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .container {
+        padding: 18px;
+    }
+
+    .profileMainSection {
+        grid-template-columns: 1fr;
+
+    }
+
+    .activityCard {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 12px;
+
+        gap: 16px;
+    }
+
+
+    /* Cover */
+
+    .coverSection {
+        height: 210px;
+
+        border-radius: 14px;
+    }
+
+    .coverImage {
+        border-radius: 14px;
+    }
+
+    .coverOverlay {
+        border-radius: 14px;
+    }
+
+
+    /* Profile Picture */
+
+    .profilePictureWrapper {
+        width: 105px;
+        height: 105px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        bottom: -52px;
+
+        border-width: 4px;
+    }
+
+
+    /* Main profile */
+
+    .profileMainSection {
+        margin-top: 42px;
+
+        gap: 16px;
+    }
+
+
+    .profileInfoCard {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+
+    /* Name */
+
+    .nameEdit {
+        font-size: 23px;
+
+        text-align: center;
+    }
+
+    .profileIdentity {
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .username {
+        font-size: 13px;
+    }
+
+
+    /* Bio */
+
+    .bioSection {
+        margin-top: 20px;
+    }
+
+    .bioTextarea {
+        min-height: 140px;
+
+        font-size: 14px;
+    }
+
+
+    /* Heading */
+
+    .sectionHeading h3 {
+        font-size: 16px;
+    }
+
+
+    /* Activity */
+
+    .activityCard {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+
+    /* Work */
+
+    .workSection {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+    .workHeader {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .addWorkButton {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+
+    .workHistoryContainer {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .workHistoryCard {
+        padding: 16px;
+    }
+
+
+    /* Update */
+
+    .updateSection {
+        justify-content: stretch;
+    }
+
+    .updateProfileBtn {
+        width: 100%;
+
+        padding: 13px;
+    }
+
+
+    /* Modal */
+
+    .modalOverlay {
+        padding: 12px;
+
+        align-items: flex-end;
+    }
+
+    .modalContainer {
+        max-width: none;
+
+        border-radius:
+            18px 18px 12px 12px;
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+    }
+
+    .modalHeader {
+        padding: 18px;
+    }
+
+    .modalBody {
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .container {
+        padding: 9px;
+    }
+
+    .coverSection {
+        height: 185px;
+    }
+
+    .profilePictureWrapper {
+        width: 92px;
+        height: 92px;
+
+        bottom: -46px;
+    }
+
+    .profileMainSection {
+        margin-top: 38px;
+    }
+
+    .nameEdit {
+        font-size: 21px;
+    }
+
+    .profileInfoCard,
+    .activityCard,
+    .workSection {
+        padding: 15px;
+    }
+
 }
