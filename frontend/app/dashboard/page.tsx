@@ -11,6 +11,41 @@ import Userlayouts from "@/src/layouts/userlayouts";
 import { BASE_URL } from "@/src/config";
 import { resetPostId } from "@/src/config/redux/reducer/authreducer/postreducer";
 
+function AvatarWithFallback({ src, name, size = "38px", className = "" }) {
+  const [broken, setBroken] = useState(false);
+
+  if (!src || broken) {
+    return (
+      <div
+        className={className}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: "50%",
+          background: "linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))",
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontWeight: "bold",
+          flexShrink: 0,
+        }}
+      >
+        {name?.charAt(0).toUpperCase() || "?"}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      className={className}
+      src={src}
+      alt={name || "Profile"}
+      onError={() => setBroken(true)}
+    />
+  );
+}
+
 export default function Dashboard(){
 
   const router = useRouter();
@@ -78,13 +113,11 @@ if(authState.user){
 
 
 <div className={`${styles.createPostContainer} ${postState.postId !== "" ? styles.hiddenOnMobile : ""}`}>
-{authState?.user?.userId?.profilePicture && (
-  <img className={styles.userProfile} width={200}
-    src={authState.user.userId.profilePicture}
-    alt="Profile"
+  <AvatarWithFallback
+    className={styles.userProfile}
+    src={authState?.user?.userId?.profilePicture}
+    name={authState?.user?.userId?.name}
   />
- 
-)}
   <textarea onChange={(e) =>
 setPostContent(e.target.value)}
 value={postContent}
@@ -113,7 +146,11 @@ value={postContent}
     <div key={post._id} className={styles.singleCard}>
 <div className={styles.singleCard_profileContainer}>
 
- <img className={styles.userProfile} src={post.userId.profilePicture} alt="Profile" />
+  <AvatarWithFallback
+    className={styles.userProfile}
+    src={post.userId.profilePicture}
+    name={post.userId.name}
+  />
 <div style={{flex: 1}}>
   <div style={{display:"flex",gap:"1.2rem",justifyContent:"space-between"}}>
   <p style={{fontWeight:"bold"}}>{post.userId.name}</p>
@@ -257,24 +294,14 @@ className={styles.allCommenContainer}>
 
 <div className={styles.singleComment} key={comment._id}>
   <div className={styles.singleComment_profileContainer}>
-    {/* <img src={comment.userId.profilePicture} alt="" /> */}
-<img 
-  src={comment.userId.profilePicture} 
-  alt="" 
-  onError={(e) => {
-    e.target.onerror = null;
-    e.target.style.display = "none";
-    e.target.nextSibling.style.display = "flex";
-  }}
-/>
-<div style={{display:"none", width:"38px", height:"38px", borderRadius:"50%", background:"linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))", color:"white", alignItems:"center", justifyContent:"center", fontWeight:"bold"}}>
-  {comment.userId.name?.charAt(0).toUpperCase()}
-</div>
-{/* 
+    <AvatarWithFallback
+      src={comment.userId.profilePicture}
+      name={comment.userId.name}
+    />
 <div>
   <p style={{fontWeight:"bold",fontSize:"1.2rem"}}>{comment.userId.name}</p>
   <p>@{comment.userId.username}</p>
-  </div> */}
+  </div>
 </div>
 <p>
 {comment.body}
