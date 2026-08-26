@@ -77,43 +77,26 @@ export default function ViewProfileClient({ userProfile }) {
     <Userlayouts>
       <DashboardLayout>
         <div className={styles.container}>
-          {/* Profile Cover */}
-          <div className={styles.backDropContainer}>
-            <img
-              className={styles.backDrop}
-              src={userProfile.userId.profilePicture}
-              alt="profile"
-            />
-          </div>
+          {/* Profile Header Block */}
+          <div className={styles.headerSection}>
+            <div className={styles.backDropContainer}>
+              <img
+                className={styles.backDrop}
+                src={userProfile.userId.profilePicture}
+                alt="profile"
+              />
+            </div>
 
-          {/* Profile Details */}
-          <div className={styles.profileContainer_details}>
-            <div className={styles.profileContainer_flex}>
-              <div style={{ flex: "0.8rem" }}>
-                {/* Name and Username */}
-                <div
-                  style={{
-                    display: "flex",
-                    width: "fit-content",
-                    alignItems: "center",
-                    gap: "1.2rem",
-                  }}
-                >
+            <div className={styles.profileMetaContainer}>
+              <div className={styles.userInfoGroup}>
+                <div className={styles.nameHeader}>
                   <h2>{userProfile.userId.name}</h2>
-
-                  <p style={{ color: "gray" }}>
+                  <p className={styles.username}>
                     @{userProfile.userId.username}
                   </p>
                 </div>
 
-                {/* Connection Buttons */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1.2rem",
-                  }}
-                >
+                <div className={styles.actionGroup}>
                   {connectionStatus === "connected" && (
                     <button className={styles.connectedButton}>
                       Connected
@@ -140,6 +123,8 @@ export default function ViewProfileClient({ userProfile }) {
 
                   {/* Download Resume */}
                   <div
+                    className={styles.downloadIconWrapper}
+                    title="Download Resume"
                     onClick={async () => {
                       const response = await clientServer.get(
                         `/user/download_resume?id=${userProfile.userId._id}`
@@ -150,16 +135,14 @@ export default function ViewProfileClient({ userProfile }) {
                         "_blank"
                       );
                     }}
-                    style={{ cursor: "pointer" }}
                   >
                     <svg
-                      style={{ width: "1.2em" }}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={1.5}
+                      strokeWidth={1.8}
                       stroke="currentColor"
-                      className="size-6"
+                      className={styles.downloadIcon}
                     >
                       <path
                         strokeLinecap="round"
@@ -171,71 +154,56 @@ export default function ViewProfileClient({ userProfile }) {
                 </div>
               </div>
 
-              {/* Bio */}
-              <p>{userProfile.bio}</p>
-
-              {/* Recent Activity */}
-              <div style={{ flex: "0.2rem" }}>
-                <h3>Recent Activity</h3>
-
-                {userPosts.length === 0 && (
-                  <p style={{ color: "gray" }}>
-                    No posts yet
-                  </p>
-                )}
-
-                {userPosts.map((post) => {
-                  return (
-                    <div
-                      key={post._id}
-                      className={styles.postCard}
-                    >
-                      <div className={styles.card}>
-                        <div
-                          className={
-                            styles.card_profileContainer
-                          }
-                        >
-                          {post.media !== "" && (
-                            <img src={post.media} alt='' />
-                          )}
-                        </div>
-
-                        <p>{post.body}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              {userProfile.bio && (
+                <p className={styles.userBio}>{userProfile.bio}</p>
+              )}
             </div>
           </div>
 
-          {/* Work History */}
-          <div className="workHistory">
-            <h4>Work History</h4>
-
-            <div className={styles.workHistoryContainer}>
-              {userProfile.pastWork?.map((work, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={styles.workHistoryCard}
-                  >
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.8rem",
-                      }}
+          {/* Body Content Grid */}
+          <div className={styles.contentGrid}>
+            {/* Work History */}
+            <div className={styles.sectionCard}>
+              <h3 className={styles.sectionTitle}>Work History</h3>
+              <div className={styles.workHistoryContainer}>
+                {userProfile.pastWork && userProfile.pastWork.length > 0 ? (
+                  userProfile.pastWork.map((work, index) => (
+                    <div
+                      key={index}
+                      className={styles.workHistoryCard}
                     >
-                      {work.company} - {work.position}
-                    </p>
+                      <div className={styles.workHeader}>
+                        <span className={styles.companyName}>{work.company}</span>
+                        <span className={styles.positionTitle}>{work.position}</span>
+                      </div>
+                      <p className={styles.workYears}>{work.years}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className={styles.emptyState}>No work history provided.</p>
+                )}
+              </div>
+            </div>
 
-                    <p>{work.years}</p>
-                  </div>
-                );
-              })}
+            {/* Recent Activity */}
+            <div className={styles.sectionCard}>
+              <h3 className={styles.sectionTitle}>Recent Activity</h3>
+              <div className={styles.activityList}>
+                {userPosts.length === 0 ? (
+                  <p className={styles.emptyState}>No posts yet</p>
+                ) : (
+                  userPosts.map((post) => (
+                    <div key={post._id} className={styles.postCard}>
+                      {post.media && (
+                        <div className={styles.mediaContainer}>
+                          <img src={post.media} alt="Post media" />
+                        </div>
+                      )}
+                      <p className={styles.postBody}>{post.body}</p>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>
