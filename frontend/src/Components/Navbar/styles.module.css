@@ -1,60 +1,386 @@
-
-
 .container {
-  padding: 0.6rem 1.2rem;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: white;
+  width: 100%;
+  background: #ffffff;
+  position: relative;
+  z-index: 1000;
 }
+
 .navBar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    min-height: 60px;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.logo {
+  width: 180px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .navBarOptionContainer {
-    display: flex;
-    margin-left: auto;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.desktopOptions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.desktopLink {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.desktopLink:hover {
+  color: #0066ff;
 }
 
 .buttonJoin {
-    background: #CD8987;
-    border-radius: 10PX;
-    padding-block: 0.6rem;
-    padding-inline: 1.2rem;
-    color: white;
-    font-size: 0.7rem;
-    cursor: pointer;
-    font-weight: bold;
+  background: #0066ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.buttonJoin p {
+  margin: 0;
 }
 
 
-.logo {
-  width: 260px;
-  position: absolute;
-  left: 30%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+/* =========================================
+   MOBILE TOP MENU
+========================================= */
+
+.mobileMenuWrapper {
+  display: none;
 }
 
-@media (max-width: 768px) {
-  .logo {
-    width: 300px;
+.menuButton {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #f5f7fa;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.menuButton:hover {
+  background: #edf2f7;
+}
+
+.menuButton span {
+  width: 19px;
+  height: 2px;
+  background: #111827;
+  border-radius: 10px;
+}
+
+
+/* =========================================
+   MENU OVERLAY
+========================================= */
+
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 9998;
+}
+
+
+/* =========================================
+   MOBILE POPUP
+========================================= */
+
+.mobileMenu {
+  position: fixed;
+  top: 62px;
+  right: 15px;
+  width: 245px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  animation: menuOpen 0.18s ease-out;
+}
+
+@keyframes menuOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-@media (max-width: 480px) {
-  .logo {
-    width: 180px;
-  }
+
+/* User information */
+
+.menuUserInfo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 7px 12px;
 }
-@media (max-width: 768px) {
-  .navBarOptionContainer > div:first-child {
+
+.menuAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #003b82,
+    #0066ff
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.menuAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menuUserInfo h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+}
+
+.menuUserInfo p {
+  margin: 3px 0 0;
+  color: #8b8f98;
+  font-size: 11px;
+}
+
+
+/* Divider */
+
+.menuDivider {
+  height: 1px;
+  background: #eeeeee;
+  margin: 3px 0;
+}
+
+
+/* Menu item */
+
+.menuItem {
+  width: 100%;
+  height: 45px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s ease;
+}
+
+.menuItem:hover {
+  background: #f5f8fc;
+}
+
+.menuIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #f2f6fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.logoutItem {
+  color: #dc2626;
+}
+
+.logoutItem .menuIcon {
+  background: #fff1f2;
+}
+
+.logoutItem:hover {
+  background: #fff5f5;
+}
+
+
+/* =========================================
+   MOBILE BOTTOM NAVBAR
+========================================= */
+
+.mobileBottomNav {
+  display: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+
+  .navBar {
+    height: 62px;
+    padding: 0 14px;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .logo {
+    width: 145px;
+  }
+
+  /* Desktop profile/logout hide */
+  .navBarOptionContainer {
     display: none;
   }
+
+  /* 3 line menu show */
+  .mobileMenuWrapper {
+    display: block;
+  }
+
+  /* Bottom navigation */
+
+  .mobileBottomNav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    z-index: 9990;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .bottomNavItem {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #30343b;
+  }
+
+  .bottomNavItem svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottomNavItem:active {
+    transform: scale(0.92);
+  }
+
+
+  /* Profile image in bottom navbar */
+
+  .profileBottomItem {
+    position: relative;
+  }
+
+  .bottomProfileIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      #003b82,
+      #0066ff
+    );
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px #dce4ee;
+  }
+
+  .bottomProfileIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  /* Popup */
+
+  .mobileMenu {
+    top: 67px;
+    right: 12px;
+    width: 235px;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+  .logo {
+    width: 130px;
+  }
+
+  .mobileMenu {
+    width: 220px;
+    right: 10px;
+  }
+
 }
