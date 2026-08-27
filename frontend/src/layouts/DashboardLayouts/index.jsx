@@ -70,7 +70,7 @@ router.push("/my-conections")
 <div className={styles.homeContainer__extraContainer}>
 <h3 className={styles.extraContainer_heading}>Top Profile</h3>
 
-{authState.all_profiles_fetched && authState.all_users.slice(0, 5).map((profile) =>{
+{authState.all_profiles_fetched && authState.all_users.filter((profile) => profile.userId).slice(0, 5).map((profile) =>{
 
 return(
   <div 

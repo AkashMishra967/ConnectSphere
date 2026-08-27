@@ -140,6 +140,7 @@ value={postContent}
 
 <div className={styles.postsContainer}>
 {[...postState.posts]
+  .filter((post) => post.userId)
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   .map((post) =>{
   return(
@@ -288,8 +289,7 @@ className={styles.allCommenContainer}>
 {postState.comments.length !== 0 &&
 
 <div>
-
-{postState.comments.map((comment, index) =>{
+{postState.comments.filter((comment) => comment.userId).map((comment, index) =>{
   return (
 
 <div className={styles.singleComment} key={comment._id}>
