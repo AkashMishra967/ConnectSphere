@@ -21,14 +21,13 @@ useEffect(() =>{
 },[])
 
 const router = useRouter();
-
 const filteredUsers = authState.all_profiles_fetched
   ? authState.all_users.filter((user) =>
-      user.userId.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.userId.username.toLowerCase().includes(searchTerm.toLowerCase())
+      user.userId &&
+      (user.userId.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.userId.username?.toLowerCase().includes(searchTerm.toLowerCase()))
     )
   : [];
-
   return (
      <Userlayouts>
     <DashboardLayout>
