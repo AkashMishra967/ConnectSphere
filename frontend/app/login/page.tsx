@@ -137,13 +137,6 @@ function LoginComponent() {
               {userLogingMethod ? "Sign in" : "Sign up"}
             </p>
 
-            <p
-              style={{
-                color: authState.isError ? "red" : "green",
-              }}
-            >
-              {authState.message}
-            </p>
 
             {formError && (
               <p style={{ color: "red" }}>
