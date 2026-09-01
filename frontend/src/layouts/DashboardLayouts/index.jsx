@@ -226,13 +226,6 @@ export default function DashboardLayout({ children }) {
 
           <div className={styles.mobileProfileHeaderActions}>
 
-            {/* RED LOGOUT */}
-            <button
-              className={styles.mobileLogoutButton}
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
 
             {/* THREE LINE BUTTON */}
             <button
