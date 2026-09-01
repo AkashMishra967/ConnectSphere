@@ -1,34 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
   const router = useRouter();
 
-  const authState = useSelector((state: any) => state.auth);
-
-  const user = authState?.user?.userId;
-
-  const [name, setName] = useState(user?.name || "");
-  const [username, setUsername] = useState(
-    user?.username || ""
-  );
-
-  const handleSave = () => {
-    console.log("Name:", name);
-    console.log("Username:", username);
-
-    alert("Basic information updated!");
-  };
+  const [notifications, setNotifications] = useState(true);
+  const [emailNotifications, setEmailNotifications] =
+    useState(true);
+  const [privateProfile, setPrivateProfile] =
+    useState(false);
 
   return (
     <div
       style={{
-        maxWidth: "800px",
-        margin: "40px auto",
-        padding: "20px",
+        maxWidth: "850px",
+        margin: "0 auto",
+        padding: "30px 20px 80px",
       }}
     >
       {/* HEADER */}
@@ -38,7 +27,7 @@ export default function SettingsPage() {
           display: "flex",
           alignItems: "center",
           gap: "15px",
-          marginBottom: "25px",
+          marginBottom: "30px",
         }}
       >
         <button
@@ -46,130 +35,324 @@ export default function SettingsPage() {
           style={{
             border: "none",
             background: "#f1f5f9",
-            padding: "10px 15px",
-            borderRadius: "8px",
+            width: "40px",
+            height: "40px",
+            borderRadius: "10px",
+            fontSize: "20px",
             cursor: "pointer",
           }}
         >
-          ← Back
+          ←
         </button>
 
-        <h1 style={{ margin: 0 }}>
-          Settings
-        </h1>
+        <div>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: "26px",
+              color: "#111827",
+            }}
+          >
+            Settings
+          </h1>
+
+          <p
+            style={{
+              margin: "5px 0 0",
+              color: "#64748b",
+              fontSize: "14px",
+            }}
+          >
+            Manage your application preferences
+          </p>
+        </div>
       </div>
 
-      {/* BASIC INFORMATION */}
+      {/* GENERAL SETTINGS */}
 
       <div
         style={{
-          background: "#ffffff",
+          background: "#fff",
           border: "1px solid #e5e7eb",
-          borderRadius: "15px",
-          padding: "25px",
-          boxShadow:
-            "0 4px 15px rgba(0,0,0,0.05)",
+          borderRadius: "16px",
+          padding: "24px",
+          marginBottom: "20px",
         }}
       >
         <h2
           style={{
-            marginTop: 0,
-            marginBottom: "5px",
+            margin: "0 0 5px",
+            fontSize: "18px",
+            color: "#111827",
           }}
         >
-          Basic Information
+          General
         </h2>
 
         <p
           style={{
-            color: "#64748b",
-            fontSize: "14px",
-            marginBottom: "25px",
+            margin: "0 0 20px",
+            fontSize: "13px",
+            color: "#94a3b8",
           }}
         >
-          Update your basic profile information.
+          Control how the application works for you.
         </p>
 
-        {/* NAME */}
+        {/* NOTIFICATIONS */}
 
-        <div style={{ marginBottom: "18px" }}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "7px",
-              fontWeight: "600",
-            }}
-          >
-            Name
-          </label>
-
-          <input
-            type="text"
-            value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
-            placeholder="Enter your name"
-            style={{
-              width: "100%",
-              boxSizing: "border-box",
-              padding: "12px",
-              border:
-                "1px solid #d1d5db",
-              borderRadius: "8px",
-              outline: "none",
-            }}
-          />
-        </div>
-
-        {/* USERNAME */}
-
-        <div style={{ marginBottom: "25px" }}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "7px",
-              fontWeight: "600",
-            }}
-          >
-            Username
-          </label>
-
-          <input
-            type="text"
-            value={username}
-            onChange={(e) =>
-              setUsername(e.target.value)
-            }
-            placeholder="Enter username"
-            style={{
-              width: "100%",
-              boxSizing: "border-box",
-              padding: "12px",
-              border:
-                "1px solid #d1d5db",
-              borderRadius: "8px",
-              outline: "none",
-            }}
-          />
-        </div>
-
-        {/* SAVE */}
-
-        <button
-          onClick={handleSave}
+        <div
           style={{
-            border: "none",
-            background: "#2563eb",
-            color: "white",
-            padding: "12px 20px",
-            borderRadius: "8px",
-            fontWeight: "600",
-            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "16px 0",
+            borderBottom: "1px solid #f1f5f9",
           }}
         >
-          Save Changes
-        </button>
+          <div>
+            <h3
+              style={{
+                margin: "0 0 5px",
+                fontSize: "15px",
+              }}
+            >
+              Notifications
+            </h3>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "12px",
+                color: "#94a3b8",
+              }}
+            >
+              Receive notifications about new activity.
+            </p>
+          </div>
+
+          <input
+            type="checkbox"
+            checked={notifications}
+            onChange={(e) =>
+              setNotifications(e.target.checked)
+            }
+          />
+        </div>
+
+        {/* EMAIL NOTIFICATIONS */}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "16px 0",
+            borderBottom: "1px solid #f1f5f9",
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                margin: "0 0 5px",
+                fontSize: "15px",
+              }}
+            >
+              Email Notifications
+            </h3>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "12px",
+                color: "#94a3b8",
+              }}
+            >
+              Receive important updates through email.
+            </p>
+          </div>
+
+          <input
+            type="checkbox"
+            checked={emailNotifications}
+            onChange={(e) =>
+              setEmailNotifications(e.target.checked)
+            }
+          />
+        </div>
+
+        {/* PRIVATE PROFILE */}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "16px 0",
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                margin: "0 0 5px",
+                fontSize: "15px",
+              }}
+            >
+              Private Profile
+            </h3>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "12px",
+                color: "#94a3b8",
+              }}
+            >
+              Limit who can view your profile.
+            </p>
+          </div>
+
+          <input
+            type="checkbox"
+            checked={privateProfile}
+            onChange={(e) =>
+              setPrivateProfile(e.target.checked)
+            }
+          />
+        </div>
+      </div>
+
+      {/* APPEARANCE */}
+
+      <div
+        style={{
+          background: "#fff",
+          border: "1px solid #e5e7eb",
+          borderRadius: "16px",
+          padding: "24px",
+          marginBottom: "20px",
+        }}
+      >
+        <h2
+          style={{
+            margin: "0 0 5px",
+            fontSize: "18px",
+            color: "#111827",
+          }}
+        >
+          Appearance
+        </h2>
+
+        <p
+          style={{
+            margin: "0 0 20px",
+            fontSize: "13px",
+            color: "#94a3b8",
+          }}
+        >
+          Customize how the application looks.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                margin: "0 0 5px",
+                fontSize: "15px",
+              }}
+            >
+              Theme
+            </h3>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "12px",
+                color: "#94a3b8",
+              }}
+            >
+              Choose your preferred application theme.
+            </p>
+          </div>
+
+          <select
+            style={{
+              padding: "9px 12px",
+              border: "1px solid #dbe3ec",
+              borderRadius: "8px",
+              background: "#fff",
+              cursor: "pointer",
+            }}
+          >
+            <option>Light</option>
+            <option>Dark</option>
+            <option>System Default</option>
+          </select>
+        </div>
+      </div>
+
+      {/* ABOUT APP */}
+
+      <div
+        style={{
+          background: "#fff",
+          border: "1px solid #e5e7eb",
+          borderRadius: "16px",
+          padding: "24px",
+        }}
+      >
+        <h2
+          style={{
+            margin: "0 0 5px",
+            fontSize: "18px",
+            color: "#111827",
+          }}
+        >
+          About
+        </h2>
+
+        <p
+          style={{
+            margin: "0 0 18px",
+            fontSize: "13px",
+            color: "#94a3b8",
+          }}
+        >
+          Information about the application.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "12px 0",
+            borderBottom: "1px solid #f1f5f9",
+          }}
+        >
+          <span>Application</span>
+          <span style={{ color: "#64748b" }}>
+            ConnectSphere
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "12px 0",
+          }}
+        >
+          <span>Version</span>
+          <span style={{ color: "#64748b" }}>
+            1.0.0
+          </span>
+        </div>
       </div>
     </div>
   );
