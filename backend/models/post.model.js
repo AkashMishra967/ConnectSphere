@@ -7,7 +7,7 @@ ref:"User"
     },
     body:{
         type:String,
-        required:true
+        required:true,
 
     },
     likes:{
