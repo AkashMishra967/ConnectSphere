@@ -892,19 +892,7 @@ export default function ProfilePage() {
                             {post.media !== "" &&
                               post.media && (
 
-                                <img
-
-                                  src={
-                                    `${BASE_URL}/${post.media}`
-                                  }
-
-                                  alt="Post"
-
-                                  className={
-                                    styles.postImage
-                                  }
-
-                                />
+                               <img src={post.media}alt="Post"className={styles.postImage}/>
 
                               )}
 
