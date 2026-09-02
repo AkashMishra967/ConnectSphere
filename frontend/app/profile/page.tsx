@@ -821,9 +821,9 @@ export default function ProfilePage() {
                       styles.sectionHeading
                     }
                   >
-                    <h3>
+                    <h4>
                       Recent Activity
-                    </h3>
+                    </h4>
 
                     <span>
                       {userPosts.length} Posts
