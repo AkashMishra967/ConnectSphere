@@ -821,7 +821,6 @@ export default function ProfilePage() {
                       styles.sectionHeading
                     }
                   >
-
                     <h3>
                       Recent Activity
                     </h3>
@@ -829,10 +828,7 @@ export default function ProfilePage() {
                     <span>
                       {userPosts.length} Posts
                     </span>
-
                   </div>
-
-
                   {/* No Posts */}
 
                   {userPosts.length === 0 ? (
@@ -842,86 +838,57 @@ export default function ProfilePage() {
                         styles.emptyActivity
                       }
                     >
-
                       <div
                         className={
                           styles.emptyIcon
                         }
                       >
-                        ✨
                       </div>
-
-
                       <h4>
                         No activity yet
                       </h4>
-
-
                       <p>
                         Your recent posts will
                         appear here.
                       </p>
-
                     </div>
 
                   ) : (
 
                     /* Posts */
-
                     <div
                       className={
                         styles.postsList
                       }
                     >
-
                       {userPosts.map(
                         (post) => (
-
                           <div
-
                             key={
                               post._id
                             }
-
                             className={
                               styles.postCard
                             }
-
                           >
-
                             {post.media !== "" &&
                               post.media && (
-
                                <img src={post.media}alt="Post"className={styles.postImage}/>
-
                               )}
-
-
                             <p
                               className={
                                 styles.postText
                               }
                             >
-
                               {post.body}
-
                             </p>
-
                           </div>
-
                         )
                       )}
-
                     </div>
-
                   )}
-
                 </div>
-
               </section>
-
-
-
               {/* =========================================
                   WORK HISTORY SECTION
               ========================================= */}
