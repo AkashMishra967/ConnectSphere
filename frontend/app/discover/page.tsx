@@ -60,24 +60,13 @@ const filteredUsers = authState.all_profiles_fetched
         key={user._id} className={styles.userCard}>
 
           <div className={styles.userCard_imageWrapper}>
-            {profile.userId.profilePicture ? (
-  <img 
-    className={styles.extraContainer_profileImg} 
-    src={profile.userId.profilePicture} 
-    alt={profile.userId.name}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.style.display = "none";
-      e.target.nextSibling.style.display = "flex";
-    }}
-  />
-) : null}
-<div 
-  className={styles.extraContainer_avatarPlaceholder}
-  style={{display: profile.userId.profilePicture ? "none" : "flex"}}
->
-  {profile.userId.name?.charAt(0).toUpperCase()}
-</div>
+            {user.userId.profilePicture ? (
+              <img className={styles.userCard_image} src={user.userId.profilePicture} alt='profile' />
+            ) : (
+              <div className={styles.userCard_placeholder}>
+                {user.userId.name?.charAt(0).toUpperCase()}
+              </div>
+            )}
           </div>
 
           <div className={styles.userCard_info}>
