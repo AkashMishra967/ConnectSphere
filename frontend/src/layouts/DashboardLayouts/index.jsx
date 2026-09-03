@@ -169,22 +169,23 @@ export default function DashboardLayout({ children }) {
                       }
                     >
                       {profile.userId.profilePicture ? (
-                        <img
-                          className={styles.extraContainer_profileImg}
-                          src={profile.userId.profilePicture}
-                          alt={profile.userId.name}
-                        />
-                      ) : (
-                        <div
-                          className={
-                            styles.extraContainer_avatarPlaceholder
-                          }
-                        >
-                          {profile.userId.name
-                            ?.charAt(0)
-                            .toUpperCase()}
-                        </div>
-                      )}
+  <img 
+    className={styles.extraContainer_profileImg} 
+    src={profile.userId.profilePicture} 
+    alt={profile.userId.name}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.style.display = "none";
+      e.target.nextSibling.style.display = "flex";
+    }}
+  />
+) : null}
+<div 
+  className={styles.extraContainer_avatarPlaceholder}
+  style={{display: profile.userId.profilePicture ? "none" : "flex"}}
+>
+  {profile.userId.name?.charAt(0).toUpperCase()}
+</div>
 
                       <div
                         className={styles.extraContainer_profileInfo}
