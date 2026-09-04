@@ -256,21 +256,24 @@ export default function DashboardLayout({ children }) {
                 {/* USER INFO */}
                 <div className={styles.profileMenuUser}>
 
-                  {profilePicture ? (
-                    <img
-                      src={profilePicture}
-                      alt={profileName}
-                      className={styles.profileMenuAvatar}
-                    />
-                  ) : (
-                    <div
-                      className={
-                        styles.profileMenuAvatarPlaceholder
-                      }
-                    >
-                      {profileInitial}
-                    </div>
-                  )}
+                 {profilePicture ? (
+  <img
+    src={profilePicture}
+    alt={profileName}
+    className={styles.mobileProfileAvatar}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.style.display = "none";
+      e.target.nextSibling.style.display = "flex";
+    }}
+  />
+) : null}
+<div 
+  className={styles.mobileProfileAvatarPlaceholder}
+  style={{display: profilePicture ? "none" : "flex"}}
+>
+  {profileInitial}
+</div>
 
                   <div>
                     <p className={styles.profileMenuName}>
@@ -439,17 +442,24 @@ export default function DashboardLayout({ children }) {
             isProfilePage ? styles.activeProfileNav : ""
           }`}
         >
-          {profilePicture ? (
-            <img
-              src={profilePicture}
-              alt={profileName}
-              className={styles.mobileProfileAvatar}
-            />
-          ) : (
-            <div className={styles.mobileProfileAvatarPlaceholder}>
-              {profileInitial}
-            </div>
-          )}
+         {profilePicture ? (
+  <img
+    src={profilePicture}
+    alt={profileName}
+    className={styles.profileMenuAvatar}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.style.display = "none";
+      e.target.nextSibling.style.display = "flex";
+    }}
+  />
+) : null}
+<div 
+  className={styles.profileMenuAvatarPlaceholder}
+  style={{display: profilePicture ? "none" : "flex"}}
+>
+  {profileInitial}
+</div>
         </div>
 
       </div>
