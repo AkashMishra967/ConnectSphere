@@ -82,7 +82,7 @@ export default function ViewProfileClient({ userProfile }) {
             <div className={styles.backDropContainer}>
     {userProfile.userId.profilePicture ? (
         <img 
-            className={styles.backDrop} 
+            className={styles.profilePicture} 
             src={userProfile.userId.profilePicture} 
             alt="profile"
             onError={(e) => {
@@ -93,14 +93,14 @@ export default function ViewProfileClient({ userProfile }) {
         />
     ) : null}
     <div 
-        className={styles.backDrop}
+        className={styles.profilePicture}
         style={{
             display: userProfile.userId.profilePicture ? "none" : "flex",
             alignItems: "center",
             justifyContent: "center",
             background: "linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))",
             color: "white",
-            fontSize: "3rem",
+            fontSize: "2.5rem",
             fontWeight: "bold"
         }}
     >
