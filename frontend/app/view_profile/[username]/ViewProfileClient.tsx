@@ -80,13 +80,33 @@ export default function ViewProfileClient({ userProfile }) {
           {/* Profile Header and Metadata */}
           <div className={styles.profileHeaderCard}>
             <div className={styles.backDropContainer}>
-              {/* Optional: Add a subtle overlay here for contrast if needed */}
-              <img
-                className={styles.profilePicture}
-                src={userProfile.userId.profilePicture}
-                alt="Profile"
-              />
-            </div>
+    {userProfile.userId.profilePicture ? (
+        <img 
+            className={styles.backDrop} 
+            src={userProfile.userId.profilePicture} 
+            alt="profile"
+            onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = "none";
+                e.target.nextSibling.style.display = "flex";
+            }}
+        />
+    ) : null}
+    <div 
+        className={styles.backDrop}
+        style={{
+            display: userProfile.userId.profilePicture ? "none" : "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))",
+            color: "white",
+            fontSize: "3rem",
+            fontWeight: "bold"
+        }}
+    >
+        {userProfile.userId.name?.charAt(0).toUpperCase()}
+    </div>
+</div>
 
             <div className={styles.metaDataWrapper}>
               <div className={styles.mainInfoBlock}>
