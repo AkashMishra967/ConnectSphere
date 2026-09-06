@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: "connectsphere",
-        allowed_formats: ["jpg", "jpeg", "png", "gif", "webp"],
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "webp", "avif"],
     },
 });
 
