@@ -634,7 +634,20 @@ export const downloadProfile = async (req, res) => {
 
 
 
-
+export const uploadCoverPicture = async (req, res) => {
+    const {token} = req.body;
+    try{
+        const user = await User.findOne({token:token});
+        if(!user) {
+            return res.status(404).json({message:"user not found"});
+        }
+        user.coverPicture = req.file.path;
+        await user.save();
+        return res.json({message: "Cover picture updated"});
+    } catch(error){
+        return res.status(500).json({message:error.message})
+    }
+}
 
 
 

@@ -165,6 +165,26 @@ export default function ProfilePage() {
   };
 
 
+
+const updateCoverPicture = async (file) => {
+    if (!file) return;
+    try {
+        const formData = new FormData();
+        formData.append("cover_picture", file);
+        formData.append("token", localStorage.getItem("token"));
+        await clientServer.post("/update_cover_picture", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
+        dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+    } catch (error) {
+        console.log("Cover picture update error:", error);
+        alert("Cover picture update nahi ho paya.");
+    }
+};
+
+
+
+
   // =========================================
   // DOWNLOAD RESUME
   // =========================================
@@ -482,35 +502,36 @@ export default function ProfilePage() {
                   styles.coverSection
                 }
               >
+<label htmlFor="coverPictureUpload" className={styles.coverImageLabel}>
+               
+  <img
+    className={
+      styles.coverImage
+    }
 
-                <img
-                  className={
-                    styles.coverImage
-                  }
+    src={
+      userProfile.userId.coverPicture ||
+      "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1400&q=80"
+    }
 
-                  src={
-                    userProfile.userId.coverPicture ||
-                    "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1400&q=80"
-                  }
+    alt="Profile cover"
+  />
 
-                  alt="Profile cover"
-                />
+  {/* Cover Overlay - hover pe dikhega */}
+  <div className={styles.coverOverlay}>
+    <span>📷 Edit Cover Photo</span>
+  </div>
+</label>
 
-
-                {/* Cover Overlay */}
-
-                <div
-                  className={
-                    styles.coverOverlay
-                  }
-                >
-
-                  <span>
-                    Profile
-                  </span>
-
-                </div>
-
+<input
+  hidden
+  type="file"
+  id="coverPictureUpload"
+  accept="image/*"
+  onChange={(e) => {
+    updateCoverPicture(e.target.files[0]);
+  }}
+/>
 
                 {/* =========================================
                     PROFILE PICTURE

@@ -7,7 +7,7 @@ import {register,login, uploadProfilePicture,updateUserProfile,
    getConnectionsRequest,
    getMyConnectionRequests,
    acceptConnectionRequest,
-   getUserProfileAndUserBasedOnUsername,
+   getUserProfileAndUserBasedOnUsername,uploadCoverPicture,
    whatAreMyConnections} from "../controllers/user.controller.js";
 
 
@@ -29,7 +29,18 @@ router.route("/update_profile_picture")
   },
   uploadProfilePicture
 );
-
+router.route("/update_cover_picture")
+.post(
+  (req, res, next) => {
+    upload.single("cover_picture")(req, res, (err) => {
+      if (err) {
+        return res.status(400).json({ error: err.message });
+      }
+      next();
+    });
+  },
+  uploadCoverPicture
+);
 
 router.route('/register').post(register);
 router.route("/login").post(login)
@@ -46,6 +57,7 @@ router.route("/user/get_connection_requests").get(whatAreMyConnections);
 router.route("/user/accept_connection_request").post(acceptConnectionRequest);
 
 router.route("/user/get_profile_based_on_username").get(getUserProfileAndUserBasedOnUsername)
+
 
 
 export default router;
