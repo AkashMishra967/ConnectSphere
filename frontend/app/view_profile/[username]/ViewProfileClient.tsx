@@ -109,7 +109,7 @@ export default function ViewProfileClient({ userProfile }) {
             background: "linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))",
             color: "white",
             fontSize: "2.5rem",
-            fontWeight: "bold"
+            fontWeight: "bold",
         }}
     >
         {userProfile.userId.name?.charAt(0).toUpperCase()}
