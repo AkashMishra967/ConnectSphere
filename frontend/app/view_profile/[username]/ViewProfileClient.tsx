@@ -80,6 +80,7 @@ export default function ViewProfileClient({ userProfile }) {
           {/* Profile Header and Metadata */}
           <div className={styles.profileHeaderCard}>
            <div 
+  <div 
   className={styles.backDropContainer}
   style={
     userProfile.userId.coverPicture 
