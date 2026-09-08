@@ -494,12 +494,13 @@ export const getUserAndProfile = async (req,res) =>{
        const userProfile = await Profile.findOne({userId: user._id})
     .populate('userId', 'name email username profilePicture coverPicture')
     
+    return res.json(userProfile)
+    
     }
     catch(error){
         return res.status(500).json({message:error.message})
     }
 }
-
 
 
 // export const getUserAndProfile = async (req, res) => {
