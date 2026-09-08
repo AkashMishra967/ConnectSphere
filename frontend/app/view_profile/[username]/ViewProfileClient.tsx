@@ -79,7 +79,14 @@ export default function ViewProfileClient({ userProfile }) {
         <div className={styles.container}>
           {/* Profile Header and Metadata */}
           <div className={styles.profileHeaderCard}>
-            <div className={styles.backDropContainer}>
+           <div 
+  className={styles.backDropContainer}
+  style={
+    userProfile.userId.coverPicture 
+      ? { backgroundImage: `url(${userProfile.userId.coverPicture})`, backgroundSize: "cover", backgroundPosition: "center" }
+      : {}
+  }
+>
     {userProfile.userId.profilePicture ? (
         <img 
             className={styles.profilePicture} 
