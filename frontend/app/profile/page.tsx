@@ -519,7 +519,7 @@ const updateCoverPicture = async (file) => {
 
   {/* Cover Overlay - hover pe dikhega */}
   <div className={styles.coverOverlay}>
-    <span>📷 Edit Cover Photo</span>
+    <span>Edit Cover Photo</span>
   </div>
 </label>
 
