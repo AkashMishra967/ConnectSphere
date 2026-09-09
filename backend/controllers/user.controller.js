@@ -701,7 +701,6 @@ export const commentPost = async(req,res) =>{
 }
 
 
-
 export const getUserProfileAndUserBasedOnUsername = async(req,res) =>{
     const {username} = req.query;
     try{
@@ -713,7 +712,7 @@ export const getUserProfileAndUserBasedOnUsername = async(req,res) =>{
             return res.status(404).json({message: "user not found"})
         }
         const userProfile = await Profile.findOne({userId:user._id})
-            .populate("userId","name username email profilePicture")
+            .populate("userId","name username email profilePicture coverPicture")
         return res.json({"profile":userProfile})
     } catch(err){
         return res.status(500).json({message:err.message})
