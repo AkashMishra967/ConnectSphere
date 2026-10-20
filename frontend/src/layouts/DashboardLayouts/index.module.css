@@ -1,94 +1,122 @@
+/* =========================================================
+   APP SHELL: sidebar | feed | suggestions
+========================================================= */
 .homeContainer {
-  display: flex;
-  min-height: 100vh;
-}
-
-.homeContainer > div:nth-child(odd) {
-  flex: 0.2;
-}
-
-.homeContainer > div:nth-child(even) {
-  flex: 0.6;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 300px;
+  gap: 1.5rem;
+  align-items: start;
+  max-width: 1280px;
+  min-height: calc(100vh - var(--nav-h));
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
 }
 
 /* ================= LEFT SIDEBAR ================= */
 
 .homeContainer__leftBar {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  align-items: flex-start;
-  border-right: 1px solid #e5e7eb;
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  padding: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .homeContainer__leftBar > div {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.2rem;
   width: 100%;
 }
 
 .sideBarOption {
+  position: relative;
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
-  gap: 1rem;
-  width: 80%;
-  min-width: 100px;
-  max-width: 80%;
-  margin: 0 auto;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-2);
   cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0.75rem 0.8rem;
-  border-radius: 10px;
+  user-select: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.sideBarOption:hover {
-  transform: translateX(3px);
-  background: #f5f7fa;
+.sideBarOption p {
+  margin: 0;
 }
 
 .sideBarOption > svg {
-  height: 1.3em;
-  width: 1.3em;
+  height: 1.3rem;
+  width: 1.3rem;
+  min-width: 1.3rem;
   flex-shrink: 0;
-  min-width: 1.3em;
+}
+
+.sideBarOption:hover {
+  background: var(--surface-muted);
+  color: var(--ink);
+}
+
+.sideBarOptionActive,
+.sideBarOptionActive:hover {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+.sideBarOptionActive::before {
+  content: "";
+  position: absolute;
+  left: -0.6rem;
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--brand);
 }
 
 /* ================= FEED ================= */
 
 .homeContainer__feedContainer {
-  padding-inline: 0.8rem;
+  min-width: 0;
 }
 
-/* ================= RIGHT PROFILE ================= */
+/* ================= RIGHT: TOP PROFILE ================= */
 
 .homeContainer__extraContainer {
-  border-left: 1px solid #dedede;
-  padding-left: 1.2rem;
-  padding-top: 0.5rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  padding: 1.1rem 0.8rem 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .extraContainer_heading {
-  font-size: 1.05rem;
+  margin: 0 0.4rem 0.7rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
+  color: var(--ink);
 }
 
 .extraContainer_profile {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.6rem 0.4rem;
-  border-radius: 10px;
+  gap: 0.75rem;
+  padding: 0.55rem 0.5rem;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.2s ease;
-  margin-bottom: 0.3rem;
+  transition: background 0.15s ease;
 }
 
 .extraContainer_profile:hover {
-  background: #f5f6f8;
+  background: var(--surface-muted);
 }
 
 .extraContainer_profileImg {
@@ -103,16 +131,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    rgb(0, 59, 130),
-    rgb(3, 93, 183)
-  );
-  color: white;
+  background: var(--avatar-gradient);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1rem;
   flex-shrink: 0;
 }
@@ -122,25 +146,26 @@
 }
 
 .extraContainer_profileName {
+  margin: 0;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--ink);
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0;
 }
 
 .extraContainer_profileUsername {
+  margin: 1px 0 0;
   font-size: 0.78rem;
-  color: #888;
+  color: var(--ink-3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 2px 0 0;
 }
 
-/* ================= MOBILE NAVBAR ================= */
+/* ================= MOBILE BOTTOM NAV ================= */
 
 .mobileNavBar {
   position: fixed;
@@ -150,32 +175,48 @@
   height: 62px;
   display: none;
   justify-content: space-around;
-  background: rgba(255, 255, 255, 0.97);
   align-items: center;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid var(--line);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
   z-index: 1000;
-  border-top: 1px solid #e5e7eb;
-  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(10px);
 }
 
 .singleNavItemHolder_mobileView {
+  position: relative;
   width: 25%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--ink-3);
   cursor: pointer;
-  position: relative;
-  transition: transform 0.15s ease;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .singleNavItemHolder_mobileView:active {
-  transform: scale(0.9);
+  transform: scale(0.92);
+}
+
+.mobileNavActive {
+  color: var(--brand);
+}
+
+.mobileNavActive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--brand);
 }
 
 .mobileNavBar svg {
-  height: 22px;
-  width: 22px;
+  height: 23px;
+  width: 23px;
 }
 
 /* ================= MOBILE PROFILE AVATAR ================= */
@@ -185,68 +226,72 @@
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #0759a5;
+  border: 2px solid var(--brand);
 }
 
 .mobileProfileAvatarPlaceholder {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    rgb(0, 59, 130),
-    rgb(3, 93, 183)
-  );
-  color: white;
+  background: var(--avatar-gradient);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 0.8rem;
-  border: 2px solid #0759a5;
+  border: 2px solid var(--brand);
 }
 
 .activeProfileNav::after {
   content: "";
   position: absolute;
-  bottom: 5px;
+  bottom: 6px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #0759a5;
+  background: var(--brand);
 }
 
-/* =====================================================
-   MOBILE PROFILE HEADER
-   Only visible on /profile
-===================================================== */
+/* ================= MOBILE PROFILE HEADER (only on /profile) ================= */
 
 .mobileProfileHeader {
   display: none;
+}
+
+.mobileProfileHeaderTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.mobileProfileHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* ================= MOBILE MENU ================= */
 
 .profileSettingsDropdown {
   position: fixed;
-  top: 65px;
+  top: 62px;
   right: 12px;
-  width: 230px;
-  background: #ffffff;
-  border: 1px solid #e8ebef;
-  border-radius: 16px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
-  padding: 10px;
+  width: 240px;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   z-index: 3000;
-  animation: menuAppear 0.18s ease-out;
+  animation: menuAppear 0.16s ease-out;
 }
 
 @keyframes menuAppear {
   from {
     opacity: 0;
-    transform: translateY(-8px) scale(0.97);
+    transform: translateY(-6px) scale(0.98);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -257,39 +302,34 @@
   position: fixed;
   inset: 0;
   z-index: 2500;
-  background: transparent;
+  background: rgba(20, 27, 45, 0.18);
 }
-
-/* ================= MENU USER ================= */
 
 .profileMenuUser {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 8px;
+  padding: 10px 8px;
 }
 
 .profileMenuAvatar {
-  width: 42px;
-  height: 42px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #e8edf3;
+  border: 2px solid var(--line);
 }
 
 .profileMenuAvatarPlaceholder {
-  width: 42px;
-  height: 42px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    rgb(0, 59, 130),
-    rgb(3, 93, 183)
-  );
-  color: white;
+  background: var(--avatar-gradient);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -297,148 +337,145 @@
   margin: 0;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #171717;
+  color: var(--ink);
+  line-height: 1.3;
 }
 
 .profileMenuUsername {
-  margin: 2px 0 0;
-  font-size: 0.75rem;
-  color: #888;
+  margin: 1px 0 0;
+  font-size: 0.76rem;
+  color: var(--ink-3);
 }
 
 .profileMenuDivider {
   height: 1px;
-  background: #eeeeee;
   margin: 6px 4px;
+  background: var(--line);
 }
-
-/* ================= MENU ITEM ================= */
 
 .profileMenuItem {
   display: flex;
   align-items: center;
   gap: 11px;
   padding: 11px 10px;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: var(--radius-sm);
   font-size: 0.88rem;
   font-weight: 600;
-  color: #303030;
-  transition: all 0.18s ease;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .profileMenuItem:hover {
-  background: #f4f6f8;
+  background: var(--surface-muted);
 }
 
 .profileMenuItem svg {
   width: 19px;
   height: 19px;
   flex-shrink: 0;
+  color: var(--ink-2);
 }
 
-.profileMenuLogout {
-  color: #dc2626;
+.profileMenuLogout,
+.profileMenuLogout svg {
+  color: var(--danger);
 }
 
 .profileMenuLogout:hover {
-  background: #fff1f2;
+  background: var(--danger-soft);
 }
-
-/* ================= MOBILE PROFILE HEADER ================= */
-
-.mobileProfileHeaderTitle {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #171717;
-}
-
-.mobileProfileHeaderActions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* RED LOGOUT BUTTON */
 
 .mobileLogoutButton {
   border: none;
-  outline: none;
-  background: #dc2626;
-  color: white;
+  background: var(--danger);
+  color: #fff;
   padding: 7px 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
-
-.mobileLogoutButton:hover {
-  background: #b91c1c;
-}
-
-.mobileLogoutButton:active {
-  transform: scale(0.95);
-}
-
-/* THREE LINE BUTTON */
 
 .mobileMenuButton {
   width: 38px;
   height: 38px;
-  border: 1px solid #e1e5ea;
-  background: #ffffff;
-  border-radius: 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
 }
 
 .mobileMenuButton:hover {
-  background: #f5f7fa;
+  background: var(--surface-muted);
 }
 
 .mobileMenuButton span {
   width: 17px;
   height: 2px;
-  border-radius: 5px;
-  background: #222;
+  border-radius: 2px;
+  background: var(--ink);
 }
 
-/* =====================================================
-   MOBILE RESPONSIVE
-===================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 1100px) {
+  .homeContainer {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
 
   .homeContainer__extraContainer {
     display: none;
   }
+}
 
+@media (max-width: 820px) {
+  .homeContainer {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 1rem;
+    padding-inline: 1rem;
+  }
+
+  .sideBarOption {
+    justify-content: center;
+    padding: 0.8rem 0;
+  }
+
+  .sideBarOption p {
+    display: none;
+  }
+
+  .sideBarOptionActive::before {
+    left: -0.6rem;
+  }
+}
+
+@media (max-width: 600px) {
   .homeContainer {
     display: block;
     min-height: auto;
+    padding: 0;
   }
 
-  .homeContainer__leftBar {
+  .homeContainer__leftBar,
+  .homeContainer__extraContainer {
     display: none;
   }
 
   .homeContainer__feedContainer {
-    padding-bottom: 75px;
-    padding-inline: 0;
+    padding: 0.75rem 0 80px;
   }
 
   .mobileNavBar {
     display: flex;
   }
 
-  /* PROFILE PAGE HEADER */
   .mobileProfileHeader {
     position: fixed;
     top: 0;
@@ -449,32 +486,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 12px;
-    background: rgba(255, 255, 255, 0.97);
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    backdrop-filter: blur(10px);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
     z-index: 2000;
-  }
-
-  /* Profile page content ko header ke neeche space */
-  .mobileProfileHeader ~ * {
-    box-sizing: border-box;
   }
 }
 
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
-
-@media only screen and (max-width: 380px) {
-
+@media (max-width: 380px) {
   .mobileProfileHeaderTitle {
     font-size: 0.9rem;
-  }
-
-  .mobileLogoutButton {
-    padding: 6px 9px;
-    font-size: 0.7rem;
   }
 
   .mobileMenuButton {
@@ -483,7 +503,7 @@
   }
 
   .profileSettingsDropdown {
-    width: 215px;
+    width: 220px;
     right: 8px;
   }
 }

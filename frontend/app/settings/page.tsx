@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./index.module.css";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -13,56 +14,22 @@ export default function SettingsPage() {
     useState(false);
 
   return (
-    <div
-      style={{
-        maxWidth: "850px",
-        margin: "0 auto",
-        padding: "30px 20px 80px",
-      }}
-    >
+    <div className={styles.page}>
       {/* HEADER */}
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
-          marginBottom: "30px",
-        }}
-      >
+      <div className={styles.header}>
         <button
           onClick={() => router.back()}
-          style={{
-            border: "none",
-            background: "#f1f5f9",
-            width: "40px",
-            height: "40px",
-            borderRadius: "10px",
-            fontSize: "20px",
-            cursor: "pointer",
-          }}
+          className={styles.backButton}
+          aria-label="Go back"
         >
           ←
         </button>
 
         <div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: "26px",
-              color: "#111827",
-            }}
-          >
-            Settings
-          </h1>
+          <h1 className={styles.title}>Settings</h1>
 
-          <p
-            style={{
-              margin: "5px 0 0",
-              color: "#64748b",
-              fontSize: "14px",
-            }}
-          >
+          <p className={styles.subtitle}>
             Manage your application preferences
           </p>
         </div>
@@ -70,69 +37,27 @@ export default function SettingsPage() {
 
       {/* GENERAL SETTINGS */}
 
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid #e5e7eb",
-          borderRadius: "16px",
-          padding: "24px",
-          marginBottom: "20px",
-        }}
-      >
-        <h2
-          style={{
-            margin: "0 0 5px",
-            fontSize: "18px",
-            color: "#111827",
-          }}
-        >
-          General
-        </h2>
+      <div className={styles.card}>
+        <h2 className={styles.cardTitle}>General</h2>
 
-        <p
-          style={{
-            margin: "0 0 20px",
-            fontSize: "13px",
-            color: "#94a3b8",
-          }}
-        >
+        <p className={styles.cardDescription}>
           Control how the application works for you.
         </p>
 
         {/* NOTIFICATIONS */}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px 0",
-            borderBottom: "1px solid #f1f5f9",
-          }}
-        >
+        <div className={styles.row}>
           <div>
-            <h3
-              style={{
-                margin: "0 0 5px",
-                fontSize: "15px",
-              }}
-            >
-              Notifications
-            </h3>
+            <h3 className={styles.rowTitle}>Notifications</h3>
 
-            <p
-              style={{
-                margin: 0,
-                fontSize: "12px",
-                color: "#94a3b8",
-              }}
-            >
+            <p className={styles.rowHint}>
               Receive notifications about new activity.
             </p>
           </div>
 
           <input
             type="checkbox"
+            className={styles.switch}
             checked={notifications}
             onChange={(e) =>
               setNotifications(e.target.checked)
@@ -142,38 +67,18 @@ export default function SettingsPage() {
 
         {/* EMAIL NOTIFICATIONS */}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px 0",
-            borderBottom: "1px solid #f1f5f9",
-          }}
-        >
+        <div className={styles.row}>
           <div>
-            <h3
-              style={{
-                margin: "0 0 5px",
-                fontSize: "15px",
-              }}
-            >
-              Email Notifications
-            </h3>
+            <h3 className={styles.rowTitle}>Email Notifications</h3>
 
-            <p
-              style={{
-                margin: 0,
-                fontSize: "12px",
-                color: "#94a3b8",
-              }}
-            >
+            <p className={styles.rowHint}>
               Receive important updates through email.
             </p>
           </div>
 
           <input
             type="checkbox"
+            className={styles.switch}
             checked={emailNotifications}
             onChange={(e) =>
               setEmailNotifications(e.target.checked)
@@ -183,37 +88,18 @@ export default function SettingsPage() {
 
         {/* PRIVATE PROFILE */}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px 0",
-          }}
-        >
+        <div className={styles.row}>
           <div>
-            <h3
-              style={{
-                margin: "0 0 5px",
-                fontSize: "15px",
-              }}
-            >
-              Private Profile
-            </h3>
+            <h3 className={styles.rowTitle}>Private Profile</h3>
 
-            <p
-              style={{
-                margin: 0,
-                fontSize: "12px",
-                color: "#94a3b8",
-              }}
-            >
+            <p className={styles.rowHint}>
               Limit who can view your profile.
             </p>
           </div>
 
           <input
             type="checkbox"
+            className={styles.switch}
             checked={privateProfile}
             onChange={(e) =>
               setPrivateProfile(e.target.checked)
@@ -224,72 +110,23 @@ export default function SettingsPage() {
 
       {/* APPEARANCE */}
 
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid #e5e7eb",
-          borderRadius: "16px",
-          padding: "24px",
-          marginBottom: "20px",
-        }}
-      >
-        <h2
-          style={{
-            margin: "0 0 5px",
-            fontSize: "18px",
-            color: "#111827",
-          }}
-        >
-          Appearance
-        </h2>
+      <div className={styles.card}>
+        <h2 className={styles.cardTitle}>Appearance</h2>
 
-        <p
-          style={{
-            margin: "0 0 20px",
-            fontSize: "13px",
-            color: "#94a3b8",
-          }}
-        >
+        <p className={styles.cardDescription}>
           Customize how the application looks.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className={styles.row}>
           <div>
-            <h3
-              style={{
-                margin: "0 0 5px",
-                fontSize: "15px",
-              }}
-            >
-              Theme
-            </h3>
+            <h3 className={styles.rowTitle}>Theme</h3>
 
-            <p
-              style={{
-                margin: 0,
-                fontSize: "12px",
-                color: "#94a3b8",
-              }}
-            >
+            <p className={styles.rowHint}>
               Choose your preferred application theme.
             </p>
           </div>
 
-          <select
-            style={{
-              padding: "9px 12px",
-              border: "1px solid #dbe3ec",
-              borderRadius: "8px",
-              background: "#fff",
-              cursor: "pointer",
-            }}
-          >
+          <select className={styles.select}>
             <option>Light</option>
             <option>Dark</option>
             <option>System Default</option>
@@ -299,59 +136,21 @@ export default function SettingsPage() {
 
       {/* ABOUT APP */}
 
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid #e5e7eb",
-          borderRadius: "16px",
-          padding: "24px",
-        }}
-      >
-        <h2
-          style={{
-            margin: "0 0 5px",
-            fontSize: "18px",
-            color: "#111827",
-          }}
-        >
-          About
-        </h2>
+      <div className={styles.card}>
+        <h2 className={styles.cardTitle}>About</h2>
 
-        <p
-          style={{
-            margin: "0 0 18px",
-            fontSize: "13px",
-            color: "#94a3b8",
-          }}
-        >
+        <p className={styles.cardDescription}>
           Information about the application.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "12px 0",
-            borderBottom: "1px solid #f1f5f9",
-          }}
-        >
+        <div className={styles.infoRow}>
           <span>Application</span>
-          <span style={{ color: "#64748b" }}>
-            ConnectSphere
-          </span>
+          <span className={styles.infoValue}>ConnectSphere</span>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "12px 0",
-          }}
-        >
+        <div className={styles.infoRow}>
           <span>Version</span>
-          <span style={{ color: "#64748b" }}>
-            1.0.0
-          </span>
+          <span className={styles.infoValue}>1.0.0</span>
         </div>
       </div>
     </div>

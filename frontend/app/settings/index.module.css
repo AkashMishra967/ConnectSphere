@@ -1,0 +1,163 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1.15rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.backButton:hover {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.subtitle {
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+.card {
+  margin-bottom: 1.1rem;
+  padding: 1.5rem 1.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cardDescription {
+  margin: 0.2rem 0 0.6rem;
+  font-size: 0.86rem;
+  color: var(--ink-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.rowTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.rowHint {
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+}
+
+/* Native checkbox restyled as a toggle switch */
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  background: var(--line-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(20, 27, 45, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.switch:checked {
+  background: var(--brand);
+}
+
+.switch:checked::after {
+  transform: translateX(18px);
+}
+
+.select {
+  flex-shrink: 0;
+  padding: 0.6rem 2rem 0.6rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: var(--brand);
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.93rem;
+  font-weight: 500;
+}
+
+.infoValue {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 1.25rem 12px 5rem;
+  }
+
+  .card {
+    padding: 1.2rem 1.1rem;
+  }
+}

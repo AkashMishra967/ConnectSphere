@@ -1,162 +1,189 @@
-.pageHeader{
-    margin-bottom: 1.5rem;
+.pageHeader {
+  margin-bottom: 1.25rem;
 }
 
-.pageTitle{
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 0.3rem;
+.pageTitle {
+  margin-bottom: 0.25rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
-.pageSubtitle{
-    color: #888;
-    font-size: 0.95rem;
+.pageSubtitle {
+  font-size: 0.95rem;
+  color: var(--ink-2);
 }
 
-.searchBar{
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: #f5f6f8;
-    border-radius: 12px;
-    padding: 0.8rem 1.2rem;
-    margin-bottom: 1.8rem;
-    max-width: 500px;
-    transition: all 0.2s;
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.searchBar:focus-within{
-    background: white;
-    box-shadow: 0 0 0 2px rgb(0,59,130);
+.searchBar:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
 }
 
-.searchIcon{
-    width: 20px;
-    height: 20px;
-    color: #888;
-    flex-shrink: 0;
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--ink-3);
 }
 
-.searchInput{
-    border: none;
-    outline: none;
-    background: transparent;
-    width: 100%;
-    font-size: 0.95rem;
+.searchInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
 }
 
-.allUserProfile{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.2rem;
+.allUserProfile {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
 }
 
-.userCard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.6rem;
-    padding: 1.6rem 1.2rem;
-    cursor: pointer;
-    background: white;
-    border-radius: 16px;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: transform 0.2s, box-shadow 0.2s;
+.userCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.6rem 1.1rem 1.2rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
 
-.userCard:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    border-color: rgb(0,59,130);
+.userCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
 }
 
-.userCard_imageWrapper{
-    width: 80px;
-    height: 80px;
+.userCard_imageWrapper {
+  width: 84px;
+  height: 84px;
 }
 
-.userCard_image{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #f0f0f0;
+.userCard_image {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--line);
 }
 
-.userCard_placeholder{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    font-weight: bold;
+.userCard_placeholder {
+  width: 84px;
+  height: 84px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--avatar-gradient);
+  color: #fff;
+  font-size: 1.9rem;
+  font-weight: 700;
 }
 
-.userCard_info{
-    width: 100%;
+.userCard_info {
+  width: 100%;
+  min-width: 0;
 }
 
-.userCard_name{
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 0.15rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.userCard_name {
+  margin-bottom: 0.1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.userCard_username{
-    color: #888;
-    font-size: 0.85rem;
+.userCard_username {
+  font-size: 0.84rem;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.viewProfileBtn{
-    margin-top: 0.4rem;
-    width: 100%;
-    padding: 0.5rem;
-    background: transparent;
-    border: 1.5px solid rgb(0,59,130);
-    color: rgb(0,59,130);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s;
+.viewProfileBtn {
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.viewProfileBtn:hover{
-    background: rgb(0,59,130);
-    color: white;
+.viewProfileBtn:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
 }
 
-.noResults{
-    grid-column: 1 / -1;
-    text-align: center;
-    color: #888;
-    padding: 3rem 0;
+.noResults {
+  grid-column: 1 / -1;
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--ink-3);
 }
 
-@media (max-width: 600px){
-    .allUserProfile{
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 0.8rem;
-    }
-    .userCard{
-        padding: 1rem 0.7rem;
-    }
-    .userCard_image, .userCard_placeholder, .userCard_imageWrapper{
-        width: 60px;
-        height: 60px;
-    }
-    .searchBar{
-        max-width: 100%;
-    }
+@media (max-width: 600px) {
+  .pageHeader,
+  .searchBar,
+  .allUserProfile {
+    margin-inline: 12px;
+  }
+
+  .searchBar {
+    max-width: none;
+  }
+
+  .pageTitle {
+    font-size: 1.4rem;
+  }
+
+  .allUserProfile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .userCard {
+    padding: 1.1rem 0.7rem 0.9rem;
+  }
+
+  .userCard_image,
+  .userCard_placeholder,
+  .userCard_imageWrapper {
+    width: 64px;
+    height: 64px;
+  }
+
+  .userCard_placeholder {
+    font-size: 1.5rem;
+  }
 }

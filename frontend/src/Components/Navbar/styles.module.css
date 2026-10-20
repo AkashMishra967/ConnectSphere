@@ -1,60 +1,118 @@
-
-
+/* =========================================================
+   TOP NAVIGATION
+========================================================= */
 .container {
-  padding: 0.6rem 1.2rem;
   position: sticky;
   top: 0;
   z-index: 20;
-  background: white;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--line);
 }
+
 .navBar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1280px;
+  height: var(--nav-h);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* The logo artwork has generous built-in whitespace, so it is
+   trimmed top and bottom to sit tightly inside the bar. */
+.logo {
+  width: 188px;
+  flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.logo img {
+  display: block;
+  margin: -13px 0;
 }
 
 .navBarOptionContainer {
-    display: flex;
-    margin-left: auto;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navLink {
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.navLink:hover {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+.navLinkMuted {
+  color: var(--ink-2);
 }
 
 .buttonJoin {
-    background: #CD8987;
-    border-radius: 10PX;
-    padding-block: 0.6rem;
-    padding-inline: 1.2rem;
-    color: white;
-    font-size: 0.7rem;
-    cursor: pointer;
-    font-weight: bold;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
+.buttonJoin p {
+  margin: 0;
+}
 
-.logo {
-  width: 260px;
-  position: absolute;
-  left: 30%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.buttonJoin:hover {
+  background: var(--brand-strong);
+}
+
+.buttonJoin:active {
+  transform: scale(0.97);
 }
 
 @media (max-width: 768px) {
-  .logo {
-    width: 300px;
+  .navBar {
+    padding: 0 1rem;
+  }
+
+  /* Profile / Logout move into the mobile menu on small screens */
+  .navBarOptionContainer > div:first-child {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .logo {
-    width: 180px;
+  .navBar {
+    height: 58px;
   }
-}
-@media (max-width: 768px) {
-  .navBarOptionContainer > div:first-child {
-    display: none;
+
+  .logo {
+    width: 158px;
+  }
+
+  .logo img {
+    margin: -11px 0;
   }
 }

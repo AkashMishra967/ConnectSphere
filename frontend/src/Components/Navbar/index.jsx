@@ -16,7 +16,7 @@ const authState = useSelector((state)=> state.auth)
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
-       <div className={styles.logo} style={{cursor:"pointer"}} onClick={() =>{
+       <div className={styles.logo} onClick={() =>{
   router.push("/")
 }}>
  <Image 
@@ -30,21 +30,20 @@ const authState = useSelector((state)=> state.auth)
 </div>
         <div className={styles.navBarOptionContainer}>
 {authState.profileFetched && <div>
-  <div style={{display:"flex",gap:"1.2rem"}}>
+  <div className={styles.navActions}>
     {/* <p>Hey, {authState.user.userId.name}</p> */}
     <p 
     onClick={() =>{
       router.push("/profile")
     }}
-    
-    style={{fontWeight:"bold",cursor:"pointer"}}>Profile</p>
+    className={styles.navLink}>Profile</p>
 
     <p onClick={() =>{
 localStorage.removeItem("token")
 router.push("/login")
 dispatch(reset())
 
-    }} style={{fontWeight:"bold",cursor:"pointer"}}>Logout</p>
+    }} className={`${styles.navLink} ${styles.navLinkMuted}`}>Logout</p>
   </div>
   
   </div>}
@@ -62,3 +61,4 @@ dispatch(reset())
     </div>
   )
 }
+

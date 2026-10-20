@@ -1,54 +1,54 @@
-/* Container */
 .container {
-  padding: 1.5rem;
-  background-color: #f7fafc;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-/* Profile Header */
-.profileHeaderCard {
-  background: #ffffff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e2e8f0;
-}
-
-.backDropContainer {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
-  position: relative;
-}
-
-.profilePicture {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  position: absolute;
-  bottom: -50px;
-  left: 2.5rem;
-  border: 5px solid #ffffff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-  background-color: #f8fafc;
-}
-
-.metaDataWrapper {
-  padding: 4.5rem 2.5rem 1.75rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ================= HEADER CARD ================= */
+
+.profileHeaderCard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.backDropContainer {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  background:
+    radial-gradient(420px 240px at 85% 0%, rgba(255, 255, 255, 0.2), transparent 65%),
+    linear-gradient(135deg, #2b50d8 0%, #4a3fd0 55%, #6b3fd4 100%);
+}
+
+.profilePicture {
+  position: absolute;
+  bottom: -52px;
+  left: 2rem;
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--surface);
+  background-color: var(--surface-muted);
+  box-shadow: var(--shadow-md);
+}
+
+.metaDataWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 4rem 2rem 1.75rem;
 }
 
 .mainInfoBlock {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -56,236 +56,251 @@
 .nameBlock {
   display: flex;
   align-items: baseline;
-  gap: 0.8rem;
   flex-wrap: wrap;
+  gap: 0.2rem 0.8rem;
 }
 
 .fullName {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-weight: 800;
-  color: #1a202c;
   line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .usernameHandle {
-  margin: 0;
-  color: #718096;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 500;
+  color: var(--ink-3);
 }
 
 .connectionActions {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.6rem;
+}
+
+.connectButtonMain,
+.statusBadgePending,
+.statusBadgeConnected {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .connectButtonMain {
-  padding: 0.6rem 1.4rem;
-  background: #2563eb;
-  border: none;
-  color: #ffffff;
-  border-radius: 9px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: background-color 0.15s ease-in-out;
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  color: #fff;
+  transition: background 0.15s ease;
 }
 
 .connectButtonMain:hover {
-  background: #1d4ed8;
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
 }
 
 .statusBadgePending {
-  padding: 0.6rem 1.4rem;
+  background: var(--warn-soft);
+  border: 1px solid #f1d9ac;
+  color: var(--warn);
   cursor: not-allowed;
-  border: 1px solid #f6ad55;
-  color: #c05621;
-  background: #fffaf0;
-  border-radius: 9px;
-  font-weight: 600;
-  font-size: 0.95rem;
 }
 
 .statusBadgeConnected {
-  padding: 0.6rem 1.4rem;
+  background: var(--success-soft);
+  border: 1px solid #bfe3cf;
+  color: var(--success);
   cursor: default;
-  border: 1px solid #68d391;
-  color: #276749;
-  background: #f0fff4;
-  border-radius: 9px;
-  font-weight: 600;
-  font-size: 0.95rem;
 }
 
 .downloadResumeAction {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem;
-  border-radius: 9px;
-  border: 1px solid #cbd5e0;
-  background: #ffffff;
-  color: #4a5568;
+  width: 42px;
+  height: 42px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--ink-2);
   cursor: pointer;
-  transition: background-color 0.1s, color 0.1s;
+  transition: background 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .downloadResumeAction:hover {
-  background: #edf2f7;
-  color: #1a202c;
+  background: var(--brand-soft);
+  border-color: var(--brand);
+  color: var(--brand-strong);
 }
 
 .resumeIcon {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .profileBioText {
+  max-width: 720px;
   margin: 0;
-  color: #4a5568;
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 850px;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  white-space: pre-wrap;
 }
 
-/* Split Content Grid */
+/* ================= CONTENT SECTIONS ================= */
+
 .splitContentLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
 }
 
 .contentSectionBlock {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1.75rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionHeadingWrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
 }
 
 .sectionTitleText {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #1a202c;
+  color: var(--ink);
 }
 
-.workCountBadge, .activityCountBadge {
-  background-color: #ebf4ff;
-  color: #2563eb;
-  padding: 0.25rem 0.6rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.8rem;
+.workCountBadge,
+.activityCountBadge {
+  min-width: 24px;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
 }
 
-.workHistoryList, .activityFeedList {
+.workHistoryList,
+.activityFeedList {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .workExperienceCard {
-  padding: 1.1rem;
-  background: #f8fafc;
-  border-radius: 11px;
-  border: 1px solid #edf2f7;
+  padding: 0.95rem 1.1rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius-md);
 }
 
 .workDetailsHeader {
   display: flex;
-  gap: 0.6rem;
-  align-items: center;
-  font-weight: 600;
-  color: #2d3748;
+  align-items: baseline;
   flex-wrap: wrap;
-  margin-bottom: 0.5rem;
+  gap: 0.15rem 0.6rem;
+  margin-bottom: 0.3rem;
 }
 
 .workCompanyName {
-  color: #1d4ed8;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .workPositionTitle {
-  color: #718096;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-2);
 }
 
 .workDurationText {
   margin: 0;
-  font-size: 0.85rem;
-  color: #718096;
+  font-size: 0.84rem;
+  color: var(--ink-3);
 }
 
 .activityFeedItem {
-  padding: 1.1rem;
-  border-radius: 11px;
-  background: #f8fafc;
-  border: 1px solid #edf2f7;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.75rem;
+  padding: 0.9rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
 }
 
 .postMediaWrapper img {
+  display: block;
   width: 100%;
   max-height: 280px;
   object-fit: cover;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
 }
 
 .postBodyContent {
   margin: 0;
-  color: #4a5568;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink);
+  overflow-wrap: anywhere;
 }
 
 .emptyDataMessage {
-  color: #a0aec0;
-  font-size: 0.95rem;
   margin: 0;
-  font-style: italic;
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--ink-3);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
 }
 
-/* Mobile & Tablet Responsiveness */
-@media screen and (max-width: 991px) {
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 991px) {
   .splitContentLayout {
     grid-template-columns: 1fr;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media (max-width: 767px) {
   .container {
-    padding: 1rem;
+    padding: 0.75rem 12px 1rem;
     gap: 1rem;
   }
 
   .backDropContainer {
-    height: 150px;
+    height: 140px;
   }
 
   .profilePicture {
-    width: 100px;
-    height: 100px;
-    bottom: -40px;
     left: 50%;
+    bottom: -44px;
+    width: 96px;
+    height: 96px;
     transform: translateX(-50%);
   }
 
   .metaDataWrapper {
-    padding: 3.5rem 1.25rem 1.5rem 1.25rem;
+    gap: 0.9rem;
+    padding: 3.5rem 1.25rem 1.5rem;
     text-align: center;
-    gap: 1rem;
   }
 
   .mainInfoBlock {
@@ -296,11 +311,11 @@
   .nameBlock {
     flex-direction: column;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.1rem;
   }
 
   .fullName {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
   }
 
   .connectionActions {
@@ -309,14 +324,6 @@
   }
 
   .contentSectionBlock {
-    padding: 1.25rem;
-  }
-
-  .sectionHeadingWrapper {
-    margin-bottom: 1.25rem;
-  }
-
-  .splitContentLayout {
-    gap: 1rem;
+    padding: 1.15rem;
   }
 }
