@@ -558,7 +558,7 @@ const updateCoverPicture = async (file) => {
       display: userProfile.userId.profilePicture ? "none" : "flex",
       alignItems: "center",
       justifyContent: "center",
-      background: "linear-gradient(135deg, rgb(0,59,130), rgb(3,93,183))",
+      background: "var(--avatar-gradient)",
       color: "white",
       fontSize: "2.5rem",
       fontWeight: "bold"

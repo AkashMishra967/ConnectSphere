@@ -136,10 +136,15 @@ function LoginComponent() {
             <p className={styles.cardleft_heading}>
               {userLogingMethod ? "Sign in" : "Sign up"}
             </p>
+            <p className={styles.cardleft_subheading}>
+              {userLogingMethod
+                ? "Welcome back. Enter your details to continue."
+                : "Create your account to start connecting."}
+            </p>
 
 
             {formError && (
-              <p style={{ color: "red" }}>
+              <p className={styles.formError} role="alert">
                 {formError}
               </p>
             )}
@@ -156,7 +161,7 @@ function LoginComponent() {
                     }
                     className={styles.inputField}
                     type="text"
-                    placeholder="username"
+                    placeholder="Username"
                     disabled={loading}
                   />
 
@@ -166,7 +171,7 @@ function LoginComponent() {
                     }
                     className={styles.inputField}
                     type="text"
-                    placeholder="Name"
+                    placeholder="Full name"
                     disabled={loading}
                   />
 
@@ -180,7 +185,7 @@ function LoginComponent() {
                 }
                 className={styles.inputField}
                 type="text"
-                placeholder="email"
+                placeholder="Email address"
                 disabled={loading}
               />
 
@@ -220,10 +225,9 @@ function LoginComponent() {
                     setUserLoginMethod(!userLogingMethod);
                   }
                 }}
-                style={{
-                  cursor: loading ? "not-allowed" : "pointer",
-                  textDecoration: "underline",
-                }}
+                className={`${styles.switchMode} ${
+                  loading ? styles.switchModeDisabled : ""
+                }`}
               >
                 <p>
                   {userLogingMethod
@@ -232,9 +236,17 @@ function LoginComponent() {
                 </p>
               </div>
 
-              {/* ================= RIGHT ================= */}
-              <div className={styles.cardContainer_right}></div>
+            </div>
+          </div>
 
+          {/* ================= RIGHT ================= */}
+          <div className={styles.cardContainer_right}>
+            <div className={styles.brandPanel}>
+              <h2>Your network, built on real work.</h2>
+              <p>
+                Share what you are doing, follow people you respect and
+                grow your connections.
+              </p>
             </div>
           </div>
 

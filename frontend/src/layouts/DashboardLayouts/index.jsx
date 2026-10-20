@@ -69,7 +69,7 @@ export default function DashboardLayout({ children }) {
                 onClick={() => {
                   router.push("/dashboard");
                 }}
-                className={styles.sideBarOption}
+                className={`${styles.sideBarOption} ${pathname === "/dashboard" ? styles.sideBarOptionActive : ""}`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ export default function DashboardLayout({ children }) {
                 onClick={() => {
                   router.push("/discover");
                 }}
-                className={styles.sideBarOption}
+                className={`${styles.sideBarOption} ${pathname === "/discover" ? styles.sideBarOptionActive : ""}`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export default function DashboardLayout({ children }) {
                 onClick={() => {
                   router.push("/my-conections");
                 }}
-                className={styles.sideBarOption}
+                className={`${styles.sideBarOption} ${pathname === "/my-conections" ? styles.sideBarOptionActive : ""}`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +372,7 @@ export default function DashboardLayout({ children }) {
           onClick={() => {
             router.push("/dashboard");
           }}
-          className={styles.singleNavItemHolder_mobileView}
+          className={`${styles.singleNavItemHolder_mobileView} ${pathname === "/dashboard" ? styles.mobileNavActive : ""}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -394,7 +394,7 @@ export default function DashboardLayout({ children }) {
           onClick={() => {
             router.push("/discover");
           }}
-          className={styles.singleNavItemHolder_mobileView}
+          className={`${styles.singleNavItemHolder_mobileView} ${pathname === "/discover" ? styles.mobileNavActive : ""}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -416,7 +416,7 @@ export default function DashboardLayout({ children }) {
           onClick={() => {
             router.push("/my-conections");
           }}
-          className={styles.singleNavItemHolder_mobileView}
+          className={`${styles.singleNavItemHolder_mobileView} ${pathname === "/my-conections" ? styles.mobileNavActive : ""}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
