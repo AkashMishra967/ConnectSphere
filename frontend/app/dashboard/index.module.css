@@ -482,6 +482,14 @@
     gap: 0.7rem;
   }
 
+  /* Image and action row start under the avatar, so the image is
+     centered in the card instead of being pushed to the right. */
+  .singleCard_image,
+  .optionsContainer {
+    margin-left: calc(-44px - 0.7rem);
+    width: calc(100% + 44px + 0.7rem);
+  }
+
   .singleCard_image img {
     min-height: 180px;
     max-height: 340px;
