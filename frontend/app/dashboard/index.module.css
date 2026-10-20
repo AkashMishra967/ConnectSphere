@@ -485,9 +485,16 @@
   /* Image and action row start under the avatar, so the image is
      centered in the card instead of being pushed to the right. */
   .singleCard_image,
-  .optionsContainer {
+  .optionsContainer,
+  .postText {
     margin-left: calc(-44px - 0.7rem);
     width: calc(100% + 44px + 0.7rem);
+  }
+
+  /* Like / comment / share spread evenly: left, center, right */
+  .optionsContainer {
+    justify-content: space-between;
+    padding-inline: 0.2rem;
   }
 
   .singleCard_image img {
